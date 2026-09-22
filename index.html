@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { margin: 0; -webkit-text-size-adjust: 100%; background: #F7F7F5; color: #111111; font-family: Barlow, system-ui, sans-serif; overflow-x: clip; }
+  a { color: #111111; }
+  a:hover { color: #F09020; }
+  ::selection { background: #F09020; color: #0A0A0A; }
+  :focus-visible { outline: 3px solid #F09020; outline-offset: 3px; }
+  @keyframes pr-marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes pr-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.72); } }
+  @keyframes pr-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  [data-svc]:hover [data-svcicon] { transform: translateY(-6px); }
+  [data-card]:hover { transform: translateY(-5px); box-shadow: 0 18px 40px -24px rgba(17,17,17,0.28); }
+  [data-card]:hover [data-zoom] { transform: scale(1.06); }
+  [data-eqcta]:hover, [data-eqcta]:focus-visible { background-size: 100% 100% !important; color: #F7F7F5 !important; }
+  [data-eqcta] span:last-child { transition: transform 380ms cubic-bezier(0.65,0,0.35,1); }
+  [data-eqcta]:hover span:last-child { transform: translateX(4px); }
+  @media (prefers-reduced-motion: reduce) { [data-eqcta] { transition: none !important; } }
+  figure:hover [data-gzoom] { transform: scale(1.06); }
+  [data-marquee]:hover [data-ptrack] { animation-play-state: paused; }
+  [data-header][data-scrolled="1"] { box-shadow: 0 10px 30px -22px rgba(17, 17, 17, 0.45); border-color: rgba(227, 226, 222, 0.7); }
+  [data-soon]:hover { border-color: #F09020; transform: translateY(-4px); }
+  [data-soon]:hover [data-roomimg] { filter: saturate(1) brightness(0.96); transform: scale(1); }
+  [data-soon]:hover [data-roomscrim] { opacity: 0.45; }
+  [data-soon]:hover [data-roomtape] { transform: translateY(-50%) rotate(-7deg) translateX(-100%); }
+  [data-soon]:hover [data-roomtapeface] { transform: scaleX(0.14); }
+  [data-fsoc]:hover { border-color: #F09020 !important; transform: translateY(-2px); }
+  [data-cdot]:hover { transform: translateY(-3px); }
+  form input:hover, form select:hover, form textarea:hover { border-color: #F09020; }
+  form input:focus, form select:focus, form textarea:focus { outline: none; border-color: #F09020; box-shadow: 0 0 0 3px rgba(240, 144, 32, 0.22), 0 0 16px -2px rgba(240, 144, 32, 0.45); }
+  [data-chan]:hover { border-color: #F09020; box-shadow: 0 0 0 3px rgba(240, 144, 32, 0.14); }
+  [data-chan]:hover [data-chanarrow] { transform: translateX(4px); }
+  [data-svcrow]:hover [data-svcimg] { transform: scale(1.03); }
+  @media (max-width: 820px) {
+    [data-svcrow] { grid-template-columns: minmax(0, 1fr) !important; }
+    [data-svcrow] > div:first-child { order: 1 !important; }
+    [data-svcrow] > div:last-child { order: 2 !important; }
+    [data-svcrow] > div:first-child > div:first-child {
+      margin-left: calc((min(1320px, 100vw) - 100vw) / 2 - clamp(16px, 4vw, 22px)) !important;
+      margin-right: calc((min(1320px, 100vw) - 100vw) / 2 - clamp(16px, 4vw, 22px)) !important;
+      border-radius: 0 !important;
+      aspect-ratio: 10 / 9 !important;
+    }
+    [data-svcrow] > div:first-child > div:last-child {
+      left: 50% !important;
+      right: auto !important;
+      transform: translate(-50%, -50%) !important;
+    }
+  }
+  [data-partner]:hover { transform: translateY(-3px); border-color: #CFCEC9; box-shadow: 0 10px 24px -18px rgba(17,17,17,0.3); }
+  [data-card]:hover [data-arrow] { opacity: 1; transform: translateY(0); }
+  [data-linkcta]:hover span:first-child { border-bottom-color: #F09020; }
+  [data-navlink]:hover { color: #F09020; }
+  @media (max-width: 1080px) { [data-svcgrid] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+  @media (max-width: 420px) { [data-svcgrid] { grid-template-columns: minmax(0, 1fr) !important; } }
+  @media (max-width: 720px) {
+    [data-nav] { order: 3; width: 100%; justify-content: flex-start; gap: 18px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px; }
+    [data-nav]::-webkit-scrollbar { display: none; }
+    [data-nav] a { flex: 0 0 auto; }
+    [data-navcta] { display: none !important; }
+    [data-brand] { flex: 1 1 auto; gap: 9px; }
+    [data-brand] img { width: 44px !important; height: 44px !important; }
+    [data-brand] span { font-size: 15px !important; }
+    [data-nav] a { font-size: 11px !important; letter-spacing: 0.14em !important; min-height: 44px; }
+    [data-nav] { align-items: center; }
+    header nav { padding-top: 8px !important; padding-bottom: 8px !important; row-gap: 8px !important; }
+  }
+  @media (max-width: 480px) {
+    [data-brand] img { width: 38px !important; height: 38px !important; }
+    [data-brand] span { font-size: 13.5px !important; letter-spacing: 0.04em !important; }
+    [data-nav] { gap: 15px; }
+    [data-nav] a { font-size: 10.5px !important; }
+    header nav { padding-top: 6px !important; padding-bottom: 6px !important; row-gap: 6px !important; }
+    html { scroll-padding-top: 104px; }
+  }
+  @media (hover: none) {
+    [data-card]:hover, [data-soon]:hover, [data-partner]:hover { transform: none; box-shadow: none; }
+    [data-roomtape] { transform: translateY(-50%) rotate(-7deg) !important; }
+    [data-card]:hover [data-zoom] { transform: none; }
+    [data-arrow] { opacity: 1 !important; transform: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    [data-motion] { animation: none !important; }
+    [data-ptrack] { animation: none !important; flex-wrap: wrap; width: 100% !important; justify-content: center; gap: 18px; }
+    [data-ptrack] [data-partner] { margin-right: 0 !important; }
+    [data-marquee] { -webkit-mask-image: none; mask-image: none; }
+    [data-partner][aria-hidden="true"] { display: none; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%;overflow-x:clip">
+
+<header data-header="1" style="position:sticky;top:0;z-index:60;background:{{ hdrBg }};backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #E3E2DE;transition:background 260ms ease,box-shadow 260ms ease,border-color 260ms ease">
+  <nav data-headernav="1" style="max-width:1320px;margin:0 auto;padding:{{ hdrPadY }} clamp(14px,3.5vw,22px);transition:padding 260ms ease;display:flex;align-items:center;gap:clamp(10px,1.6vw,20px);flex-wrap:wrap">
+    <a href="#top" data-brand="1" style="display:flex;align-items:center;gap:11px;text-decoration:none;flex:0 0 auto;min-height:44px">
+      <img src="images/brand-pr-backline-studio-logo.webp" alt="PR Backline Studio" data-headerlogo="1" style="width:{{ hdrLogo }};height:{{ hdrLogo }};object-fit:contain;transition:width 260ms ease,height 260ms ease" />
+      <span data-headerword="1" style="font-family:Oswald,sans-serif;font-weight:600;font-size:{{ hdrWord }};letter-spacing:0.05em;text-transform:uppercase;line-height:1.14;color:#111111;transition:font-size 260ms ease">PR Backline<br />Studio<span style="color:#F09020">.</span></span>
+    </a>
+    <div style="flex:1 1 auto;display:flex;justify-content:center;gap:clamp(12px,2.2vw,28px);flex-wrap:wrap" data-nav="1">
+      <a href="#usluge" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navServices }}</a>
+      <a href="#oprema" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navEquipment }}</a>
+      <a href="#sale" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navRooms }}</a>
+      <a href="#o-nama" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navAbout }}</a>
+      <a href="#kontakt" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navContact }}</a>
+    </div>
+    <div role="group" aria-label="Jezik / Language" style="display:flex;border:1px solid #CFCEC9;border-radius:999px;overflow:hidden;flex:0 0 auto">
+      <button type="button" onClick="{{ setSR }}" aria-pressed="{{ isSR }}" style="min-height:44px;padding:6px 16px;border:0;background-color:{{ bgLangSR }};color:{{ fgLangSR }};font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;cursor:pointer">SR</button>
+      <button type="button" onClick="{{ setEN }}" aria-pressed="{{ isEN }}" style="min-height:44px;padding:6px 16px;border:0;background-color:{{ bgLangEN }};color:{{ fgLangEN }};font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;cursor:pointer">EN</button>
+    </div>
+    <a href="#kontakt" data-navcta="1" style="flex:0 0 auto;min-height:44px;display:inline-flex;align-items:center;padding:11px 20px;background:#F09020;color:#0A0A0A;text-decoration:none;border-radius:999px;font-family:Oswald,sans-serif;font-size:13px;letter-spacing:0.12em;text-transform:uppercase">{{ t.navBook }}</a>
+  </nav>
+</header>
+
+<section id="top" style="position:relative;min-height:min(92vh,900px);display:flex;align-items:center;justify-content:center;padding:clamp(72px,11vw,96px) clamp(16px,4vw,22px);overflow:hidden;isolation:isolate">
+  <img src="images/service-roadie-systems-stage.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;z-index:-2" />
+  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,247,245,0.88) 0%,rgba(247,247,245,0.92) 55%,#F7F7F5 100%);z-index:-1"></div>
+  <div style="width:100%;max-width:1100px;margin:0 auto;text-align:center">
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#7A4600;margin:0 0 26px">{{ t.heroEyebrow }}</p>
+    <h1 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(46px,9.5vw,168px);line-height:0.92;letter-spacing:-0.03em;text-transform:uppercase;margin:0;color:#111111">PR Backline<br />Studio<span style="color:#F09020">.</span></h1>
+    <p style="font-family:Oswald,sans-serif;font-weight:500;font-size:clamp(15px,2vw,22px);letter-spacing:0.24em;text-transform:uppercase;color:#111111;margin:26px 0 0">{{ t.heroKicker }}</p>
+    <p style="font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#55554F;margin:22px auto 0;max-width:62ch">{{ t.heroBody }}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:38px">
+      <a href="#kontakt" style="min-height:52px;display:inline-flex;align-items:center;padding:15px 30px;background:#F09020;color:#0A0A0A;text-decoration:none;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.14em;text-transform:uppercase">{{ t.ctaBook }}</a>
+      <a href="#oprema" style="min-height:52px;display:inline-flex;align-items:center;padding:15px 30px;background:transparent;color:#111111;text-decoration:none;border:1px solid #C9C8C3;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.14em;text-transform:uppercase">{{ t.ctaEquipment }}</a>
+    </div>
+  </div>
+</section>
+
+<section id="usluge" style="background:#F7F7F5;padding:clamp(56px,9vw,96px) clamp(16px,4vw,22px) clamp(64px,10vw,104px)">
+  <div style="max-width:1320px;margin:0 auto">
+    <div style="text-align:center;max-width:760px;margin:0 auto clamp(44px,7vw,72px)">
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 16px">{{ t.svcEyebrow }}</p>
+      <h2 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,76px);line-height:0.94;letter-spacing:-0.02em;text-transform:uppercase;margin:0">{{ t.svcTitle }}</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px" data-svcgrid="1">
+
+      <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
+        <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
+          <circle cx="60" cy="68" r="34" />
+          <circle cx="60" cy="68" r="12" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="60" cy="34" r="2.6" fill="#F09020" stroke="none" />
+          <circle cx="36" cy="44" r="2.2" fill="#1A1A1A" stroke="none" />
+          <circle cx="84" cy="44" r="2.2" fill="#1A1A1A" stroke="none" />
+          <circle cx="36" cy="92" r="2.2" fill="#1A1A1A" stroke="none" />
+          <circle cx="84" cy="92" r="2.2" fill="#1A1A1A" stroke="none" />
+          <line x1="20" y1="10" x2="66" y2="36" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="100" y1="10" x2="54" y2="36" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="44" y1="98" x2="44" y2="108" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="76" y1="98" x2="76" y2="108" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="8" y1="108" x2="112" y2="108" />
+        </svg>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc1Title }}</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc1Body }}</p>
+        <a href="#oprema" onClick="{{ selDrums }}" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLink }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+
+      <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
+        <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
+          <line x1="48" y1="10" x2="72" y2="10" stroke="#1A1A1A" stroke-width="1.6" />
+          <path d="M48 10 L44 16" stroke="#1A1A1A" stroke-width="1.6" />
+          <path d="M72 10 L76 16" stroke="#1A1A1A" stroke-width="1.6" />
+          <rect x="16" y="16" width="88" height="88" rx="5" />
+          <line x1="16" y1="38" x2="104" y2="38" />
+          <circle cx="30" cy="27" r="3" fill="#F09020" stroke="none" />
+          <circle cx="46" cy="27" r="3.4" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="60" cy="27" r="3.4" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="74" cy="27" r="3.4" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="88" cy="27" r="3.4" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="60" cy="71" r="23" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="60" cy="71" r="7" />
+          <line x1="24" y1="104" x2="24" y2="110" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="96" y1="104" x2="96" y2="110" stroke="#1A1A1A" stroke-width="1.6" />
+        </svg>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc2Title }}</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc2Body }}</p>
+        <a href="#oprema" onClick="{{ selGuitar }}" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLink }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+
+      <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
+        <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
+          <rect x="22" y="12" width="76" height="24" rx="4" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="34" cy="24" r="3" fill="#F09020" stroke="none" />
+          <line x1="48" y1="24" x2="88" y2="24" stroke="#1A1A1A" stroke-width="1.6" />
+          <rect x="22" y="44" width="76" height="64" rx="4" />
+          <circle cx="60" cy="76" r="24" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="60" cy="76" r="8" />
+        </svg>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc3Title }}</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc3Body }}</p>
+        <a href="#oprema" onClick="{{ selBass }}" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLink }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+
+      <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
+        <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
+          <path d="M20 62 C20 24 100 24 100 62" />
+          <rect x="10" y="58" width="20" height="30" rx="8" />
+          <rect x="15" y="64" width="10" height="18" rx="4" stroke="#1A1A1A" stroke-width="1.6" />
+          <rect x="90" y="58" width="20" height="30" rx="8" />
+          <rect x="95" y="64" width="10" height="18" rx="4" stroke="#1A1A1A" stroke-width="1.6" />
+          <path d="M26 42 C30 34, 42 30, 52 30" stroke="#1A1A1A" stroke-width="1.1" />
+          <path d="M94 42 C90 34, 78 30, 68 30" stroke="#1A1A1A" stroke-width="1.1" />
+          <path d="M100 84 C99 98, 84 104, 70 100" stroke="#1A1A1A" stroke-width="1.6" />
+          <rect x="52" y="92" width="18" height="11" rx="5" fill="#F09020" stroke="none" />
+          <path d="M20 86 C10 96, 26 100, 18 110" stroke="#1A1A1A" stroke-width="1.1" />
+        </svg>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc5Title }}</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc5Body }}</p>
+        <a href="#usluga-ekipa" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLinkCrew }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+
+      <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
+        <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
+          <path d="M14 104 L14 30 L60 16 L106 30 L106 104" />
+          <line x1="8" y1="104" x2="112" y2="104" />
+          <rect x="40" y="56" width="40" height="48" rx="2" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="72" cy="82" r="2.4" fill="#F09020" stroke="none" />
+          <line x1="24" y1="40" x2="24" y2="94" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="32" y1="42" x2="32" y2="94" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="88" y1="42" x2="88" y2="94" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="96" y1="40" x2="96" y2="94" stroke="#1A1A1A" stroke-width="1.6" />
+        </svg>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc4Title }}</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc4Body }}</p>
+        <a href="#sale" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLinkRooms }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+      <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
+        <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
+          <ellipse cx="60" cy="38" rx="38" ry="12" />
+          <ellipse cx="60" cy="38" rx="30" ry="9" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="22" y1="38" x2="22" y2="66" />
+          <line x1="98" y1="38" x2="98" y2="66" />
+          <path d="M22 66 a38 12 0 0 0 76 0" />
+          <ellipse cx="60" cy="42" rx="38" ry="12" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="30" y1="42" x2="30" y2="70" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="43" y1="42" x2="43" y2="70" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="56" y1="42" x2="56" y2="70" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="69" y1="42" x2="69" y2="70" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="82" y1="42" x2="82" y2="70" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="95" y1="42" x2="95" y2="70" stroke="#1A1A1A" stroke-width="1.1" />
+          <rect x="96" y="48" width="9" height="14" rx="2" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="60" y1="74" x2="60" y2="88" stroke="#1A1A1A" stroke-width="1.6" />
+          <path d="M60 88 L38 106 M60 88 L82 106 M60 88 L60 106" stroke="#1A1A1A" stroke-width="1.6" />
+          <polygon points="12,26 18,22 58,20 58,26" stroke="#1A1A1A" stroke-width="1.6" />
+          <polygon points="108,26 102,22 62,20 62,26" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="60" cy="56" r="5" fill="#F09020" stroke="none" />
+        </svg>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc6Title }}</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc6Body }}</p>
+        <a href="#skola-bubnjeva" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLinkLessons }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+      <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
+        <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
+          <path d="M54 60 C44 57 33 62 31 75 C29 90 41 106 54 106 L66 106 C79 106 91 90 89 75 C87 62 76 57 66 60 Z" />
+          <rect x="54" y="22" width="12" height="40" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="54" y1="22" x2="66" y2="22" stroke="#1A1A1A" stroke-width="2.2" />
+          <path d="M53 22 L67 22 L69 6 L51 6 Z" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="47" cy="11" r="2.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="47" cy="18" r="2.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="73" cy="11" r="2.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="73" cy="18" r="2.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="54" y1="32" x2="66" y2="32" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="54" y1="42" x2="66" y2="42" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="54" y1="52" x2="66" y2="52" stroke="#1A1A1A" stroke-width="1.1" />
+          <rect x="49" y="68" width="22" height="7" rx="1.6" stroke="#1A1A1A" stroke-width="1.6" />
+          <rect x="49" y="80" width="22" height="7" rx="1.6" stroke="#1A1A1A" stroke-width="1.6" />
+          <rect x="52" y="93" width="16" height="5" rx="1.4" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="80" cy="92" r="3.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="80" cy="80" r="3.2" fill="#F09020" stroke="none" />
+        </svg>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc7Title }}</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc7Body }}</p>
+        <a href="#skola-elektricne-gitare" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLinkLessons }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+      <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
+        <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
+          <path d="M60 108 C42 108 31 97 31 84 C31 75 37 69 37 62 C37 55 33 51 33 45 C33 36 45 30 60 30 C75 30 87 36 87 45 C87 51 83 55 83 62 C83 69 89 75 89 84 C89 97 78 108 60 108 Z" />
+          <circle cx="60" cy="78" r="12" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="60" cy="78" r="16" stroke="#1A1A1A" stroke-width="1.1" />
+          <rect x="55" y="8" width="10" height="24" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="55" y1="32" x2="65" y2="32" stroke="#1A1A1A" stroke-width="2.2" />
+          <circle cx="49" cy="14" r="2.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="49" cy="21" r="2.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="71" cy="14" r="2.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <circle cx="71" cy="21" r="2.2" stroke="#1A1A1A" stroke-width="1.6" />
+          <rect x="48" y="95" width="24" height="6" rx="1.6" stroke="#1A1A1A" stroke-width="1.6" />
+          <line x1="56" y1="32" x2="56" y2="95" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="60" y1="32" x2="60" y2="95" stroke="#1A1A1A" stroke-width="1.1" />
+          <line x1="64" y1="32" x2="64" y2="95" stroke="#1A1A1A" stroke-width="1.1" />
+          <circle cx="60" cy="49" r="3" fill="#F09020" stroke="none" />
+        </svg>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc8Title }}</h3>
+        <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc8Body }}</p>
+        <a href="#skola-akusticne-gitare" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLinkLessons }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section aria-hidden="true" style="background:#F7F7F5;padding:clamp(28px,4vw,54px) 0 clamp(34px,4.5vw,58px);overflow:hidden">
+  <div style="transform:rotate(-2.2deg);width:112%;margin-left:-6%;background:#F09020;color:#0A0A0A;padding:10px 0;overflow:hidden">
+    <div data-motion="1" style="display:flex;width:max-content;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(26px,5vw,62px);text-transform:uppercase;animation:pr-marq 38s linear infinite;animation-play-state:{{ playState }}">
+      <span style="padding-right:40px;white-space:nowrap">{{ t.bandA }}</span>
+      <span style="padding-right:40px;white-space:nowrap">{{ t.bandA }}</span>
+    </div>
+  </div>
+  <div style="transform:rotate(1.6deg);width:112%;margin-left:-6%;background:#111111;color:#F7F7F5;padding:10px 0;margin-top:12px;overflow:hidden">
+    <div data-motion="1" style="display:flex;width:max-content;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(26px,5vw,62px);text-transform:uppercase;animation:pr-marq 32s linear infinite reverse;animation-play-state:{{ playState }}">
+      <span style="padding-right:40px;white-space:nowrap">{{ t.bandB }}</span>
+      <span style="padding-right:40px;white-space:nowrap">{{ t.bandB }}</span>
+    </div>
+  </div>
+</section>
+<div style="background:#F7F7F5;display:flex;justify-content:center;padding:22px 20px 0">
+  <button type="button" onClick="{{ togglePause }}" style="min-height:44px;padding:10px 18px;border:1px solid #CFCEC9;background:transparent;color:#55554F;border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer">{{ motionLabel }}</button>
+</div>
+
+<section id="oprema" style="padding:clamp(52px,8vw,88px) clamp(16px,4vw,22px) clamp(64px,10vw,104px);background:#F7F7F5">
+  <div style="max-width:1320px;margin:0 auto">
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 16px">{{ t.eqEyebrow }}</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:end">
+      <h2 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(34px,5.6vw,78px);line-height:0.92;letter-spacing:-0.02em;text-transform:uppercase;margin:0;max-width:15ch">{{ t.eqTitle }}</h2>
+      <div>
+        <p style="font-size:16.5px;line-height:1.65;margin:0 0 14px;color:#55554F">{{ t.eqBody1 }}</p>
+        <p style="font-size:16.5px;line-height:1.65;margin:0;color:#55554F">{{ t.eqBody2 }}</p>
+      </div>
+    </div>
+
+    <div role="group" aria-label="{{ t.filterLabel }}" style="display:flex;flex-wrap:wrap;gap:8px;margin:48px 0 36px">
+      <button type="button" onClick="{{ selAll }}" style="min-height:44px;padding:11px 22px;border:1px solid #D5D4CF;background-color:{{ bgAll }};color:{{ fgAll }};border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer">{{ t.tabAll }}</button>
+      <button type="button" onClick="{{ selDrums }}" style="min-height:44px;padding:11px 22px;border:1px solid #D5D4CF;background-color:{{ bgDrums }};color:{{ fgDrums }};border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer">{{ t.tabDrums }}</button>
+      <button type="button" onClick="{{ selCymbals }}" style="min-height:44px;padding:11px 22px;border:1px solid #D5D4CF;background-color:{{ bgCymbals }};color:{{ fgCymbals }};border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer">{{ t.tabCymbals }}</button>
+      <button type="button" onClick="{{ selGuitar }}" style="min-height:44px;padding:11px 22px;border:1px solid #D5D4CF;background-color:{{ bgGuitar }};color:{{ fgGuitar }};border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer">{{ t.tabGuitar }}</button>
+      <button type="button" onClick="{{ selBass }}" style="min-height:44px;padding:11px 22px;border:1px solid #D5D4CF;background-color:{{ bgBass }};color:{{ fgBass }};border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer">{{ t.tabBass }}</button>
+      <button type="button" onClick="{{ selHeads }}" style="min-height:44px;padding:11px 22px;border:1px solid #D5D4CF;background-color:{{ bgHeads }};color:{{ fgHeads }};border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer">{{ t.tabHeads }}</button>
+      <span style="margin-left:auto;align-self:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#6E6D67">{{ countLabel }}</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:clamp(16px,2.4vw,24px)">
+      <sc-for list="{{ visibleItems }}" as="it" hint-placeholder-count="6">
+        <article data-card="1" style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px;overflow:hidden;transition:transform 220ms ease,box-shadow 220ms ease">
+          <div style="position:relative;background:#E6E5E4;aspect-ratio:1/1;overflow:hidden">
+            <img data-src="{{ it.img }}" ref="{{ setCardImg }}" alt="{{ it.alt }}" loading="{{ it.loading }}" fetchpriority="{{ it.priority }}" decoding="async" width="640" height="640" data-zoom="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 460ms cubic-bezier(0.2,0.7,0.2,1)" />
+            <span style="position:absolute;left:16px;top:16px;padding:7px 13px;border-radius:999px;background:#111111;color:#F7F7F5;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase">{{ it.catLabel }}</span>
+            <span aria-hidden="true" style="position:absolute;right:18px;top:14px;font-family:Oswald,sans-serif;font-weight:700;font-size:34px;line-height:1;color:#D9D8D3">{{ it.index }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;flex:1 1 auto;padding:14px clamp(16px,2.2vw,22px) 16px">
+            <h3 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(21px,1.7vw,26px);line-height:1.04;letter-spacing:-0.01em;text-transform:uppercase;margin:0 0 8px;min-height:2.08em;overflow-wrap:break-word;text-wrap:pretty">{{ it.name }}</h3>
+            <p style="font-size:13.5px;line-height:1.4;color:#55554F;margin:0 0 10px">{{ it.desc }}</p>
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#7A7972;margin:0 0 5px">{{ it.headLabel }}</p>
+            <p style="font-family:Oswald,sans-serif;font-weight:600;font-size:clamp(18px,1.45vw,21px);line-height:1.1;letter-spacing:0.005em;color:#9C5A00;margin:0 0 10px">{{ it.headValue }}</p>
+            <dl style="margin:0 0 12px;display:flex;flex-direction:column;gap:0;border-top:1px solid #EBEAE6">
+              <sc-for list="{{ it.rows }}" as="sp" hint-placeholder-count="3">
+                <div style="display:flex;align-items:baseline;gap:14px;padding:5px 0;border-bottom:1px solid #EBEAE6">
+                  <dt style="flex:0 0 38%;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#7A7972;margin:0">{{ sp.label }}</dt>
+                  <dd style="flex:1 1 auto;min-width:0;margin:0;font-size:14px;line-height:1.45;color:#26251F">{{ sp.value }}</dd>
+                </div>
+              </sc-for>
+            </dl>
+            <a href="#kontakt" data-eqcta="1" style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:11px 20px;border-radius:999px;overflow:hidden;background-color:#F2F1ED;background-image:linear-gradient(#111111,#111111);background-repeat:no-repeat;background-position:left center;background-size:0% 100%;color:#111111;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;transition:background-size 380ms cubic-bezier(0.65,0,0.35,1),color 260ms ease 60ms">
+              <span>{{ it.enquire }}</span>
+              <span aria-hidden="true" style="font-size:16px">&#8594;</span>
+            </a>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="dodatne-usluge" style="background:#F7F7F5;overflow-x:clip;padding:0 0 clamp(60px,9vw,104px)">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,22px);display:flex;flex-direction:column;gap:clamp(64px,9vw,112px)">
+    <header style="padding-top:clamp(48px,6.5vw,84px);display:flex;align-items:center;gap:clamp(16px,3vw,36px)">
+      <span aria-hidden="true" style="flex:1 1 0;min-width:24px;height:1px;background:#CFCEC9"></span>
+      <h2 style="flex:0 1 auto;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(40px,8.4vw,124px);line-height:0.9;letter-spacing:-0.01em;text-transform:uppercase;text-align:center;margin:0;color:transparent;-webkit-text-stroke:1.5px #111111;text-wrap:balance">{{ t.moreTitle }}<span style="color:#F09020;-webkit-text-stroke:0">.</span></h2>
+      <span aria-hidden="true" style="flex:1 1 0;min-width:24px;height:1px;background:#CFCEC9"></span>
+    </header>
+    <div id="usluga-ekipa" data-svcrow="1" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(34px,8vw,132px);align-items:center">
+      <div style="position:relative;order:2;min-width:0">
+        <div style="position:relative;aspect-ratio:10/9;margin-right:calc((min(1320px, 100vw) - 100vw) / 2 - clamp(16px, 4vw, 22px));border-radius:50% 0 0 50% / 50% 0 0 50%;overflow:hidden;background:#E6E5E4">
+          <img src="images/service-roadie-systems-stage.webp" alt="{{ t.rsAlt }}" loading="lazy" data-svcimg="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 46%;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)" />
+          <span style="position:absolute;left:38%;bottom:26px;padding:8px 14px;border-radius:999px;background:#111111;color:#F7F7F5;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase">{{ t.rsBadge }}</span>
+        </div>
+        <div style="position:absolute;left:calc(clamp(99px,11.3vw,137px) / -2);top:50%;transform:translateY(-50%);width:clamp(99px,11.3vw,137px);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;pointer-events:none">
+          {{ ringSvc1 }}
+          <a href="#kontakt" aria-label="{{ t.rsCta }}" style="position:absolute;inset:22%;border-radius:50%;background:#111111;color:#F7F7F5;display:flex;align-items:center;justify-content:center;font-size:24px;text-decoration:none;pointer-events:auto">&#8594;</a>
+        </div>
+      </div>
+      <div style="order:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start">
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 16px">{{ t.rsEyebrow }}</p>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,60px);line-height:0.94;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 20px;text-wrap:balance">{{ t.rsTitle }}</h3>
+        <p style="font-size:clamp(15.5px,1.5vw,17.5px);line-height:1.65;color:#55554F;margin:0 0 24px;max-width:52ch">{{ t.rsBody }}</p>
+        <ul style="list-style:none;margin:0 0 30px;padding:0;display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ t.rsBulletsRows }}" as="b" hint-placeholder-count="3">
+            <li style="display:flex;align-items:baseline;gap:12px">
+              <span aria-hidden="true" style="flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:#F09020;color:#111111;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1">&#10003;</span>
+              <span style="min-width:0;font-size:15.5px;line-height:1.45;color:#26251F">{{ b.label }}</span>
+            </li>
+          </sc-for>
+        </ul>
+        <a href="#kontakt" style="min-height:52px;display:inline-flex;align-items:center;gap:12px;padding:15px 28px;background:#111111;color:#F7F7F5;text-decoration:none;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.12em;text-transform:uppercase">{{ t.rsCta }}<span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+    <div id="skola-bubnjeva" data-svcrow="1" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(34px,8vw,132px);align-items:center">
+      <div style="position:relative;order:1;min-width:0">
+        <div style="position:relative;aspect-ratio:10/9;margin-left:calc((min(1320px, 100vw) - 100vw) / 2 - clamp(16px, 4vw, 22px));border-radius:0 50% 50% 0 / 0 50% 50% 0;overflow:hidden;background:#060606">
+          <img src="images/service-drum-school-dragan-radulovic.webp" alt="{{ t.dsAlt }}" loading="lazy" data-svcimg="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 50%;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)" />
+          <span style="position:absolute;left:38%;bottom:26px;padding:8px 14px;border-radius:999px;background:#111111;color:#F7F7F5;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase">{{ t.dsBadge }}</span>
+        </div>
+        <div style="position:absolute;right:calc(clamp(99px,11.3vw,137px) / -2);top:50%;transform:translateY(-50%);width:clamp(99px,11.3vw,137px);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;pointer-events:none">
+          {{ ringSvc2 }}
+          <a href="#kontakt" aria-label="{{ t.dsCta }}" style="position:absolute;inset:22%;border-radius:50%;background:#111111;color:#F7F7F5;display:flex;align-items:center;justify-content:center;font-size:24px;text-decoration:none;pointer-events:auto">&#8594;</a>
+        </div>
+      </div>
+      <div style="order:2;min-width:0;display:flex;flex-direction:column;align-items:flex-start">
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 16px">{{ t.dsEyebrow }}</p>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,60px);line-height:0.94;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 20px;text-wrap:balance">{{ t.dsTitle }}</h3>
+        <p style="font-size:clamp(15.5px,1.5vw,17.5px);line-height:1.65;color:#55554F;margin:0 0 24px;max-width:52ch">{{ t.dsBody }}</p>
+        <ul style="list-style:none;margin:0 0 30px;padding:0;display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ t.dsBulletsRows }}" as="b" hint-placeholder-count="3">
+            <li style="display:flex;align-items:baseline;gap:12px">
+              <span aria-hidden="true" style="flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:#F09020;color:#111111;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1">&#10003;</span>
+              <span style="min-width:0;font-size:15.5px;line-height:1.45;color:#26251F">{{ b.label }}</span>
+            </li>
+          </sc-for>
+        </ul>
+        <a href="#kontakt" style="min-height:52px;display:inline-flex;align-items:center;gap:12px;padding:15px 28px;background:#111111;color:#F7F7F5;text-decoration:none;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.12em;text-transform:uppercase">{{ t.dsCta }}<span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+    <div id="skola-elektricne-gitare" data-svcrow="1" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(34px,8vw,132px);align-items:center">
+      <div style="position:relative;order:2;min-width:0">
+        <div style="position:relative;aspect-ratio:10/9;margin-right:calc((min(1320px, 100vw) - 100vw) / 2 - clamp(16px, 4vw, 22px));border-radius:50% 0 0 50% / 50% 0 0 50%;overflow:hidden;background:#151719">
+          <img src="images/service-guitar-school-sasa-fris.webp" alt="{{ t.gsAlt }}" loading="lazy" data-svcimg="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 34%;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)" />
+          <span style="position:absolute;left:38%;bottom:26px;padding:8px 14px;border-radius:999px;background:#111111;color:#F7F7F5;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase">{{ t.gsBadge }}</span>
+        </div>
+        <div style="position:absolute;left:calc(clamp(99px,11.3vw,137px) / -2);top:50%;transform:translateY(-50%);width:clamp(99px,11.3vw,137px);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;pointer-events:none">
+          {{ ringSvc3 }}
+          <a href="#kontakt" aria-label="{{ t.gsCta }}" style="position:absolute;inset:22%;border-radius:50%;background:#111111;color:#F7F7F5;display:flex;align-items:center;justify-content:center;font-size:24px;text-decoration:none;pointer-events:auto">&#8594;</a>
+        </div>
+      </div>
+      <div style="order:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start">
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 16px">{{ t.gsEyebrow }}</p>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,60px);line-height:0.94;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 20px;text-wrap:balance">{{ t.gsTitle }}</h3>
+        <p style="font-size:clamp(15.5px,1.5vw,17.5px);line-height:1.65;color:#55554F;margin:0 0 24px;max-width:52ch">{{ t.gsBody }}</p>
+        <ul style="list-style:none;margin:0 0 30px;padding:0;display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ t.gsBulletsRows }}" as="b" hint-placeholder-count="3">
+            <li style="display:flex;align-items:baseline;gap:12px">
+              <span aria-hidden="true" style="flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:#F09020;color:#111111;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1">&#10003;</span>
+              <span style="min-width:0;font-size:15.5px;line-height:1.45;color:#26251F">{{ b.label }}</span>
+            </li>
+          </sc-for>
+        </ul>
+        <a href="#kontakt" style="min-height:52px;display:inline-flex;align-items:center;gap:12px;padding:15px 28px;background:#111111;color:#F7F7F5;text-decoration:none;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.12em;text-transform:uppercase">{{ t.gsCta }}<span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+    <div id="skola-akusticne-gitare" data-svcrow="1" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(34px,8vw,132px);align-items:center">
+      <div style="position:relative;order:1;min-width:0">
+        <div style="position:relative;aspect-ratio:10/9;margin-left:calc((min(1320px, 100vw) - 100vw) / 2 - clamp(16px, 4vw, 22px));border-radius:0 50% 50% 0 / 0 50% 50% 0;overflow:hidden;background:#171410">
+          <img src="images/service-acoustic-school-vladimir-prosic-v6.webp" alt="{{ t.agAlt }}" loading="lazy" data-svcimg="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:18% 42%;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)" />
+          <span style="position:absolute;left:38%;bottom:26px;padding:8px 14px;border-radius:999px;background:#111111;color:#F7F7F5;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase">{{ t.agBadge }}</span>
+        </div>
+        <div style="position:absolute;right:calc(clamp(99px,11.3vw,137px) / -2);top:50%;transform:translateY(-50%);width:clamp(99px,11.3vw,137px);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;pointer-events:none">
+          {{ ringSvc4 }}
+          <a href="#kontakt" aria-label="{{ t.agCta }}" style="position:absolute;inset:22%;border-radius:50%;background:#111111;color:#F7F7F5;display:flex;align-items:center;justify-content:center;font-size:24px;text-decoration:none;pointer-events:auto">&#8594;</a>
+        </div>
+      </div>
+      <div style="order:2;min-width:0;display:flex;flex-direction:column;align-items:flex-start">
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 16px">{{ t.agEyebrow }}</p>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,60px);line-height:0.94;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 20px;text-wrap:balance">{{ t.agTitle }}</h3>
+        <p style="font-size:clamp(15.5px,1.5vw,17.5px);line-height:1.65;color:#55554F;margin:0 0 24px;max-width:52ch">{{ t.agBody }}</p>
+        <ul style="list-style:none;margin:0 0 30px;padding:0;display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ t.agBulletsRows }}" as="b" hint-placeholder-count="3">
+            <li style="display:flex;align-items:baseline;gap:12px">
+              <span aria-hidden="true" style="flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:#F09020;color:#111111;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1">&#10003;</span>
+              <span style="min-width:0;font-size:15.5px;line-height:1.45;color:#26251F">{{ b.label }}</span>
+            </li>
+          </sc-for>
+        </ul>
+        <a href="#kontakt" style="min-height:52px;display:inline-flex;align-items:center;gap:12px;padding:15px 28px;background:#111111;color:#F7F7F5;text-decoration:none;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.12em;text-transform:uppercase">{{ t.agCta }}<span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sale" style="background:#111111;color:#F7F7F5;padding:clamp(60px,9vw,104px) clamp(16px,4vw,22px);overflow:hidden">
+  <div style="max-width:1320px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:0 0 26px">
+      <span data-motion="1" aria-hidden="true" style="width:9px;height:9px;border-radius:50%;background:#F09020;animation:pr-pulse 2.2s ease-in-out infinite;animation-play-state:{{ playState }}"></span>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#F09020;margin:0">{{ t.roomsEyebrow }}</p>
+    </div>
+    <h2 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(46px,10vw,150px);line-height:0.86;letter-spacing:-0.035em;text-transform:uppercase;margin:0;max-width:16ch;text-wrap:balance">{{ t.roomsSoonTitle }}</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:40px;align-items:end;margin:38px 0 0">
+      <div>
+        <p style="font-size:17px;line-height:1.65;color:#B9B8B3;margin:0 0 14px;max-width:50ch">{{ t.roomsSoonBody1 }}</p>
+        <p style="font-size:17px;line-height:1.65;color:#B9B8B3;margin:0;max-width:50ch">{{ t.roomsSoonBody2 }}</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#kontakt" style="min-height:52px;display:inline-flex;align-items:center;padding:15px 30px;background:#F09020;color:#0A0A0A;text-decoration:none;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.14em;text-transform:uppercase">{{ t.roomsNotify }}</a>
+        <a href="#oprema" style="min-height:52px;display:inline-flex;align-items:center;padding:15px 30px;background:transparent;color:#F7F7F5;text-decoration:none;border:1px solid #3C3C3C;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.14em;text-transform:uppercase">{{ t.ctaEquipment }}</a>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(12px,2vw,18px);margin-top:clamp(44px,7vw,72px)">
+      <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="4">
+        <div data-soon="1" style="position:relative;aspect-ratio:4/5;border:1px solid #232323;border-radius:22px;overflow:hidden;background:#171717;transition:border-color 220ms ease,transform 220ms ease">
+          <img src="{{ r.img }}" alt="" aria-hidden="true" loading="lazy" data-roomimg="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0.72) brightness(0.62);transform:scale(1.04);transition:filter 420ms ease,transform 620ms cubic-bezier(0.2,0.7,0.2,1)" />
+          <span aria-hidden="true" data-roomscrim="1" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,0.42) 0%,rgba(10,10,10,0.2) 42%,rgba(10,10,10,0.78) 100%);transition:opacity 420ms ease"></span>
+          <span aria-hidden="true" data-roomtape="1" style="position:absolute;left:-30%;right:-30%;top:50%;height:clamp(27px,4vw,41px);transform:translateY(-50%) rotate(-7deg);transform-origin:0% 50%;overflow:hidden;transition:transform 640ms cubic-bezier(0.55,0,0.3,1);pointer-events:none">
+            <span data-roomtapeface="1" style="position:absolute;inset:0;background:#F09020;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 10px 24px -14px rgba(0,0,0,0.7);transform-origin:0% 50%;transition:transform 640ms cubic-bezier(0.55,0,0.3,1)">
+              <span style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(13px,1.6vw,17px);letter-spacing:0.1em;text-transform:uppercase;color:#0A0A0A;white-space:nowrap">{{ r.tape }}</span>
+            </span>
+          </span>
+          <span aria-hidden="true" style="position:absolute;right:-6px;bottom:-26px;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(96px,14vw,150px);line-height:1;color:rgba(247,247,245,0.1);letter-spacing:-0.04em">{{ r.num }}</span>
+          <span style="position:absolute;left:24px;top:24px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#F09020">{{ t.roomsSoonTag }}</span>
+          <span style="position:absolute;left:24px;right:24px;bottom:24px;font-family:Oswald,sans-serif;font-weight:600;font-size:22px;letter-spacing:0.06em;text-transform:uppercase;color:#F7F7F5;text-shadow:0 2px 12px rgba(0,0,0,0.6)">{{ r.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="o-nama" style="padding:clamp(56px,9vw,96px) clamp(16px,4vw,22px);background:#F7F7F5">
+  <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(36px,5vw,56px);align-items:center">
+    <div style="display:flex;justify-content:center">
+      <div style="position:relative;width:min(442px,78vw);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center">
+        <img src="images/brand-logo-outer.webp" alt="" aria-hidden="true" data-motion="1" style="position:absolute;inset:-1.99%;width:103.97%;height:103.97%;object-fit:contain;animation:pr-spin 26s linear infinite;animation-play-state:{{ playState }}" />
+        <img src="images/brand-logo-inner.webp" alt="{{ t.altLogo }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain" />
+      </div>
+    </div>
+    <div>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 16px">{{ t.aboutEyebrow }}</p>
+      <h2 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(34px,5.4vw,72px);line-height:0.92;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 24px">{{ t.aboutTitle }}</h2>
+      <p style="font-size:16.5px;line-height:1.65;color:#55554F;margin:0 0 14px;max-width:56ch">{{ t.aboutBody1 }}</p>
+      <p style="font-size:16.5px;line-height:1.65;color:#55554F;margin:0 0 14px;max-width:56ch">{{ t.aboutBody2 }}</p>
+      <p style="font-size:16.5px;line-height:1.65;color:#55554F;margin:0;max-width:56ch">{{ t.aboutBody3 }}</p>
+    </div>
+  </div>
+
+  <div style="max-width:1320px;margin:clamp(80px,12vw,140px) auto 0">
+    <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;margin:0 0 30px">
+      <div>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 14px">{{ t.partnersEyebrow }}</p>
+        <h3 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,58px);line-height:0.94;letter-spacing:-0.02em;text-transform:uppercase;margin:0">{{ t.partnersTitle }}</h3>
+      </div>
+    </div>
+    <div data-marquee="1" style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)">
+      <div data-ptrack="1" style="display:flex;width:max-content;padding:4px 0;animation:pr-marq 34s linear infinite;animation-play-state:{{ playState }}">
+        <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
+          <div data-partner="1" aria-hidden="false" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+            <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+            <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+            <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+            <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+            <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
+          </div>
+        </sc-for>
+        <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+            <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" style="background:#EFEEEA;color:#111111;padding:clamp(56px,9vw,96px) clamp(16px,4vw,22px)">
+  <div style="max-width:1320px;margin:0 auto">
+    <div style="text-align:center;max-width:820px;margin:0 auto 60px">
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#9C5A00;margin:0 0 16px">{{ t.contactEyebrow }}</p>
+      <h2 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(34px,5.8vw,80px);line-height:0.92;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 20px">{{ t.contactTitle }}</h2>
+      <p style="font-size:16.5px;line-height:1.65;color:#55554F;margin:0">{{ t.contactBody }}</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(18px,2.6vw,28px);align-items:stretch">
+      <form onSubmit="{{ submitForm }}" style="display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px;padding:clamp(22px,3.4vw,32px)">
+        <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:21px;letter-spacing:0.12em;text-transform:uppercase;margin:0">{{ t.formTitle }}</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px">
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#6E6D67">{{ t.fName }}
+            <input type="text" name="name" required="required" style="min-height:46px;background:#FFFFFF;border:1px solid #D5D4CF;border-radius:12px;padding:12px 14px;color:#111111;font-family:Barlow,sans-serif;font-size:15px;letter-spacing:0;transition:border-color 180ms ease,box-shadow 180ms ease" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#6E6D67">{{ t.fPhone }}
+            <input type="tel" name="phone" required="required" style="min-height:46px;background:#FFFFFF;border:1px solid #D5D4CF;border-radius:12px;padding:12px 14px;color:#111111;font-family:Barlow,sans-serif;font-size:15px;letter-spacing:0;transition:border-color 180ms ease,box-shadow 180ms ease" />
+          </label>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px">
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#6E6D67">{{ t.fNeed }}
+            <select name="need" style="min-height:46px;background:#FFFFFF;border:1px solid #D5D4CF;border-radius:12px;padding:12px 14px;color:#111111;font-family:Barlow,sans-serif;font-size:15px;letter-spacing:0;transition:border-color 180ms ease,box-shadow 180ms ease">
+              <option value="backline">{{ t.fNeedBackline }}</option>
+              <option value="crew">{{ t.fNeedCrew }}</option>
+              <option value="room">{{ t.fNeedRoom }}</option>
+              <option value="drums">{{ t.fNeedDrums }}</option>
+              <option value="electric">{{ t.fNeedElectric }}</option>
+              <option value="acoustic">{{ t.fNeedAcoustic }}</option>
+              <option value="other">{{ t.fNeedOther }}</option>
+            </select>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#6E6D67">{{ t.fDate }}
+            <input type="date" name="date" style="min-height:46px;background:#FFFFFF;border:1px solid #D5D4CF;border-radius:12px;padding:12px 14px;color:#111111;font-family:Barlow,sans-serif;font-size:15px;letter-spacing:0;transition:border-color 180ms ease,box-shadow 180ms ease" />
+          </label>
+        </div>
+        <label style="flex:1 1 auto;display:flex;flex-direction:column;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#6E6D67">{{ t.fCity }}
+          <input type="text" name="city" style="min-height:46px;background:#FFFFFF;border:1px solid #D5D4CF;border-radius:12px;padding:12px 14px;color:#111111;font-family:Barlow,sans-serif;font-size:15px;letter-spacing:0;transition:border-color 180ms ease,box-shadow 180ms ease" />
+        </label>
+        <label style="flex:1 1 auto;display:flex;flex-direction:column;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#6E6D67">{{ t.fMessage }}
+          <textarea name="message" rows="6" style="background:#FFFFFF;border:1px solid #D5D4CF;border-radius:12px;padding:12px 14px;color:#111111;font-family:Barlow,sans-serif;font-size:15px;letter-spacing:0;transition:border-color 180ms ease,box-shadow 180ms ease;resize:vertical;flex:1 1 auto;min-height:118px"></textarea>
+        </label>
+        <button type="submit" style="min-height:52px;padding:15px 28px;border:0;background:#F09020;color:#0A0A0A;border-radius:999px;font-family:Oswald,sans-serif;font-size:14px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer">{{ t.fSubmit }}</button>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.6;color:#6E6D67;margin:0">{{ formNote }}</p>
+      </form>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+
+        <a href="tel:+381621803874" data-chan="1" style="display:flex;align-items:center;gap:18px;padding:clamp(20px,2.6vw,24px);background:#111111;border:1px solid #111111;border-radius:24px;text-decoration:none;color:#F7F7F5;transition:border-color 180ms ease,box-shadow 180ms ease">
+          <span aria-hidden="true" style="flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:#F09020;display:flex;align-items:center;justify-content:center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5c0-.6.5-1 1-1h2.6c.5 0 .9.3 1 .8l.8 3.1c.1.4 0 .8-.4 1l-1.7 1.1c1 2.2 2.8 4 5 5l1.1-1.7c.2-.4.6-.5 1-.4l3.1.8c.5.1.8.5.8 1V18c0 .6-.5 1.1-1.1 1C10.3 18.4 4.6 12.7 5 4.5Z" fill="#111111" /></svg>
+          </span>
+          <span style="min-width:0;display:flex;flex-direction:column;gap:5px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:#A6A5A0">{{ t.chPhone }}</span>
+            <span style="font-family:Oswald,sans-serif;font-weight:500;font-size:clamp(18px,2vw,23px);line-height:1.15">+381 62 180 3874</span>
+          </span>
+          <span data-chanarrow="1" aria-hidden="true" style="margin-left:auto;font-size:22px;color:#F09020;transition:transform 180ms ease">&#8594;</span>
+        </a>
+
+        <div style="background:#FFFFFF;border:1px solid #E3E2DE;border-radius:24px;overflow:hidden">
+          <a href="mailto:contact-us@prbacklinestudio.com" data-chan="1" style="display:flex;align-items:center;gap:18px;padding:clamp(20px,2.6vw,24px);text-decoration:none;color:#111111;border:1px solid transparent;border-radius:24px;transition:border-color 180ms ease,box-shadow 180ms ease">
+            <span aria-hidden="true" style="flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:#F09020;display:flex;align-items:center;justify-content:center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.4" stroke="#111111" stroke-width="1.8" /><path d="M4 7l8 6 8-6" stroke="#111111" stroke-width="1.8" stroke-linecap="round" /></svg>
+            </span>
+            <span style="min-width:0;display:flex;flex-direction:column;gap:5px">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:#6E6D67">{{ t.chEmail }}</span>
+              <span style="font-family:Oswald,sans-serif;font-weight:500;font-size:clamp(18px,2vw,23px);line-height:1.15;overflow-wrap:anywhere">contact-us@prbacklinestudio.com</span>
+            </span>
+            <span data-chanarrow="1" aria-hidden="true" style="margin-left:auto;font-size:20px;color:#9C5A00;transition:transform 180ms ease">&#8594;</span>
+          </a>
+          <div style="height:1px;background:#EBEAE6;margin:0 clamp(20px,2.6vw,24px)"></div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:clamp(18px,2.4vw,22px) clamp(20px,2.6vw,24px)">
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:#6E6D67;margin:0">{{ t.chDirect }}</p>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-left:auto">
+            <a href="https://wa.me/381621803874" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp" data-cdot="1" style="width:43px;height:43px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform 180ms ease">
+              <img src="images/icon-whatsapp-black.webp" alt="" aria-hidden="true" loading="lazy" style="width:22px;height:22px;object-fit:contain;display:block" />
+            </a>
+            <a href="viber://chat?number=%2B381621803874" title="Viber" aria-label="Viber" data-cdot="1" style="width:43px;height:43px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform 180ms ease">
+              <img src="images/icon-viber-black.webp" alt="" aria-hidden="true" loading="lazy" style="width:22px;height:22px;object-fit:contain;display:block" />
+            </a>
+            <a href="https://www.instagram.com/backline.panonija.roadie/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram" data-cdot="1" style="width:43px;height:43px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform 180ms ease">
+              <img src="images/icon-instagram-black.webp" alt="" aria-hidden="true" loading="lazy" style="width:22px;height:22px;object-fit:contain;display:block" />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61587193306534" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook" data-cdot="1" style="width:43px;height:43px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform 180ms ease">
+              <img src="images/icon-facebook-black.webp" alt="" aria-hidden="true" loading="lazy" style="width:22px;height:22px;object-fit:contain;display:block" />
+            </a>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;padding:clamp(22px,2.8vw,28px);background:#EFEEEA;border:1px solid #E3E2DE;border-radius:24px">
+          <h3 style="font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(20px,2.3vw,25px);letter-spacing:-0.005em;text-transform:uppercase;margin:0 0 20px">{{ t.checklistTitle }}</h3>
+          <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:none">
+            <sc-for list="{{ checkRows }}" as="ck" hint-placeholder-count="5">
+              <li style="display:flex;align-items:flex-start;gap:16px;padding:11px 0;border-top:1px solid #E1E0DB">
+                <span aria-hidden="true" style="flex:0 0 auto;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#F09020;padding-top:3px">{{ ck.num }}</span>
+                <span style="min-width:0;font-size:15px;line-height:1.45;color:#26251F">{{ ck.text }}</span>
+              </li>
+            </sc-for>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#111111;color:#A6A5A0;padding:clamp(56px,8vw,88px) clamp(16px,4vw,22px) clamp(28px,4vw,36px)">
+  <div style="max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(36px,5vw,56px)">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,48px);justify-content:space-between;align-items:center">
+      <a href="#top" style="display:flex;align-items:center;gap:18px;text-decoration:none">
+        <img src="images/brand-logo-footer.webp" alt="PR Backline Studio" style="width:clamp(84px,9vw,112px);height:clamp(84px,9vw,112px);object-fit:contain;display:block" />
+        <span style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:Oswald,sans-serif;font-weight:600;font-size:clamp(22px,2.6vw,30px);letter-spacing:0.05em;text-transform:uppercase;line-height:1.1;color:#F7F7F5">PR Backline Studio<span style="color:#F09020">.</span></span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#A6A5A0">{{ t.footerTag }}</span>
+        </span>
+      </a>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="https://wa.me/381621803874" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp" data-fsoc="1" style="width:48px;height:48px;border-radius:50%;border:1px solid #2E2E2C;display:flex;align-items:center;justify-content:center;transition:border-color 180ms ease,transform 180ms ease">
+          <img src="images/icon-whatsapp-white.webp" alt="" aria-hidden="true" loading="lazy" style="width:22px;height:22px;object-fit:contain;display:block" />
+        </a>
+        <a href="viber://chat?number=%2B381621803874" aria-label="Viber" title="Viber" data-fsoc="1" style="width:48px;height:48px;border-radius:50%;border:1px solid #2E2E2C;display:flex;align-items:center;justify-content:center;transition:border-color 180ms ease,transform 180ms ease">
+          <img src="images/icon-viber-white.webp" alt="" aria-hidden="true" loading="lazy" style="width:22px;height:22px;object-fit:contain;display:block" />
+        </a>
+        <a href="https://www.instagram.com/backline.panonija.roadie/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" data-fsoc="1" style="width:48px;height:48px;border-radius:50%;border:1px solid #2E2E2C;display:flex;align-items:center;justify-content:center;transition:border-color 180ms ease,transform 180ms ease">
+          <img src="images/icon-instagram-white.webp" alt="" aria-hidden="true" loading="lazy" style="width:22px;height:22px;object-fit:contain;display:block" />
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61587193306534" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook" data-fsoc="1" style="width:48px;height:48px;border-radius:50%;border:1px solid #2E2E2C;display:flex;align-items:center;justify-content:center;transition:border-color 180ms ease,transform 180ms ease">
+          <img src="images/icon-facebook-white.webp" alt="" aria-hidden="true" loading="lazy" style="width:22px;height:22px;object-fit:contain;display:block" />
+        </a>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center;border-top:1px solid #262624;padding-top:22px">
+      <div style="display:flex;flex-wrap:wrap;gap:4px 24px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase">
+        <a href="tel:+381621803874" style="color:#C9C8C3;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">+381 62 180 3874</a>
+        <a href="mailto:contact-us@prbacklinestudio.com" style="color:#C9C8C3;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">contact-us@prbacklinestudio.com</a>
+      </div>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;margin:0;color:#8A8984">© 2026 PR Backline Studio</p>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { lang: 'sr', cat: 'all', paused: false, copied: false, sent: false, scrolled: false };
+
+  items = [
+    { id: 'gretsch-renown', cat: 'drums', name: "Gretsch Renown", img: 'images/eq-gretsch-white-drum-kit.webp',
+      sr: { desc: "Kompletan Gretsch Renown bubanj set za nastupe i probe.", alt: "Gretsch bubanj set" },
+      en: { desc: "A complete Gretsch Renown drum kit for shows and rehearsals.", alt: "Gretsch drum kit" },
+      specs: [["Konfiguracija","Configuration","Kompletan bubanj set","Complete drum kit"],["Veličine","Sizes","10\" · 12\" · 14\" · 16\" · 20\" · 22\"","10\" · 12\" · 14\" · 16\" · 20\" · 22\""],["Doboš","Snare","14 × 6,5\"","14 × 6.5\""]] },
+    { id: 'tama-starclassic', cat: 'drums', name: "Tama Starclassic", img: 'images/eq-tama-green-drum-kit.webp',
+      sr: { desc: "Tama Starclassic set u zelenoj završnoj obradi.", alt: "Zeleni Tama bubanj set" },
+      en: { desc: "A Tama Starclassic kit in a green finish.", alt: "Green Tama drum kit" },
+      specs: [["Konfiguracija","Configuration","Kompletan bubanj set","Complete drum kit"],["Veličine","Sizes","10\" · 12\" · 16\" · 22\"","10\" · 12\" · 16\" · 22\""],["Doboš","Snare","14 × 6,5\"","14 × 6.5\""],["Završna obrada","Finish","Zelena","Green"]] },
+    { id: 'tama-superstar', cat: 'drums', name: "Tama Superstar", img: 'images/eq-tama-wood-drum-kit.webp',
+      sr: { desc: "Tama Superstar set u završnoj obradi u dezenu drveta.", alt: "Tama bubanj set u dezenu drveta" },
+      en: { desc: "A Tama Superstar kit in a wood-pattern finish.", alt: "Tama drum kit in a wood-pattern finish" },
+      specs: [["Konfiguracija","Configuration","Kompletan bubanj set","Complete drum kit"],["Veličine","Sizes","10\" · 12\" · 16\" · 22\"","10\" · 12\" · 16\" · 22\""],["Doboš","Snare","14 × 6\"","14 × 6\""]] },
+    { id: 'yamaha-shells', cat: 'drums', name: "Yamaha Live Custom", img: 'images/eq-yamaha-black-drum-shell-set.webp',
+      sr: { desc: "Yamaha Live Custom set bubnjeva sa hrastovim školjkama.", alt: "Yamaha Live Custom set bubnjeva" },
+      en: { desc: "Yamaha Live Custom drum shell set with oak shells.", alt: "Yamaha Live Custom drum shell set" },
+      specs: [["Konfiguracija","Configuration","Set od 5 bubnjeva","5-piece shell set"],["Veličine","Sizes","8\" · 10\" · 12\" · 14\" · 22\"","8\" · 10\" · 12\" · 14\" · 22\""],["Školjke","Shells","Hrast","Oak"]] },
+    { id: 'zildjian-a-custom', cat: 'cymbals', name: "Zildjian A Custom set", img: 'images/eq-zildjian-a-custom-cymbal-set.webp',
+      sr: { desc: "Set činela iz Zildjian A Custom serije.", alt: "Zildjian A Custom set činela" },
+      en: { desc: "A cymbal set from the Zildjian A Custom series.", alt: "Zildjian A Custom cymbal set" },
+      specs: [["Sastav seta","Set contents","Ride, crash činele i hi-hat","Ride, crashes and hi-hat"],["Serija","Series","A Custom","A Custom"],["Završna obrada","Finish","Brilliant","Brilliant"]] },
+    { id: 'fender-65-twin', cat: 'guitar', name: "Fender ’65 Twin Reverb", img: 'images/eq-fender-twin-reverb-combo.webp',
+      sr: { desc: "Lampaški kombo sa reverbom i vibratom.", alt: "Fender Twin Reverb kombo pojačalo" },
+      en: { desc: "Tube combo with reverb and vibrato.", alt: "Fender Twin Reverb combo amplifier" },
+      specs: [["Snaga","Power","85 W","85 W"],["Zvučnici","Speakers","2 × 12\"","2 × 12\""],["Tip","Type","Lampaški kombo","Tube combo"],["Efekti","Effects","Reverb i vibrato","Reverb and vibrato"]] },
+    { id: 'fender-hrd-112', cat: 'guitar', name: "Fender Hot Rod Deluxe 112", img: 'images/eq-fender-deluxe-combo.webp',
+      sr: { desc: "Lampaški kombo sa jednim zvučnikom i reverbom.", alt: "Fender Deluxe kombo pojačalo" },
+      en: { desc: "Tube combo with a single speaker and reverb.", alt: "Fender Deluxe combo amplifier" },
+      specs: [["Snaga","Power","40 W","40 W"],["Zvučnici","Speakers","1 × 12\"","1 × 12\""],["Tip","Type","Lampaški kombo","Tube combo"],["Efekti","Effects","Reverb","Reverb"]] },
+    { id: 'fender-hrdv-410', cat: 'guitar', name: "Fender Hot Rod DeVille 410", img: 'images/eq-fender-combo.webp',
+      sr: { desc: "Lampaški kombo sa četiri zvučnika i reverbom.", alt: "Fender kombo pojačalo" },
+      en: { desc: "Tube combo with four speakers and reverb.", alt: "Fender combo amplifier" },
+      specs: [["Snaga","Power","60 W","60 W"],["Zvučnici","Speakers","4 × 10\"","4 × 10\""],["Tip","Type","Lampaški kombo","Tube combo"],["Efekti","Effects","Reverb","Reverb"]] },
+    { id: 'vox-combo', cat: 'guitar', name: "VOX kombo", img: 'images/eq-vox-combo.webp',
+      sr: { desc: "VOX gitarsko kombo pojačalo sa ugrađenim zvučnicima.", alt: "VOX kombo pojačalo" },
+      en: { desc: "VOX guitar combo amplifier with built-in speakers.", alt: "VOX combo amplifier" },
+      specs: [["Tip","Type","Gitarski kombo","Guitar combo"]] },
+    { id: 'marshall-jcm900-50', cat: 'heads', name: "Marshall JCM 900 — 50 W", img: 'images/eq-marshall-jcm900-50w-head.webp',
+      sr: { desc: "Marshall JCM 900 Hi Gain Dual Reverb glava od 50 W.", alt: "Marshall JCM 900 50W glava" },
+      en: { desc: "Marshall JCM 900 Hi Gain Dual Reverb head, 50 W.", alt: "Marshall JCM 900 50W head" },
+      specs: [["Snaga","Power","50 W","50 W"],["Kanali","Channels","2","2"],["Tip","Type","Lampaška gitarska glava","Tube guitar head"],["Efekti","Effects","Reverb na oba kanala","Reverb on both channels"]] },
+    { id: 'marshall-jcm900-100', cat: 'heads', name: "Marshall JCM 900 — 100 W", img: 'images/eq-marshall-jcm900-100w-head.webp',
+      sr: { desc: "Marshall JCM 900 Hi Gain Dual Reverb glava od 100 W.", alt: "Marshall JCM 900 100W glava" },
+      en: { desc: "Marshall JCM 900 Hi Gain Dual Reverb head, 100 W.", alt: "Marshall JCM 900 100W head" },
+      specs: [["Snaga","Power","100 W","100 W"],["Kanali","Channels","2","2"],["Tip","Type","Lampaška gitarska glava","Tube guitar head"],["Efekti","Effects","Reverb na oba kanala","Reverb on both channels"]] },
+    { id: 'marshall-jcm2000-dsl', cat: 'heads', name: "Marshall JCM 2000 DSL", img: 'images/eq-marshall-jcm2000-head.webp',
+      sr: { desc: "Marshall JCM 2000 Dual Super Lead glava sa dva kanala.", alt: "Marshall JCM 2000 glava" },
+      en: { desc: "Marshall JCM 2000 Dual Super Lead head with two channels.", alt: "Marshall JCM 2000 head" },
+      specs: [["Kanali","Channels","Classic Gain i Ultra Gain","Classic Gain and Ultra Gain"],["Tip","Type","Lampaška gitarska glava","Tube guitar head"]] },
+    { id: 'marshall-1960', cat: 'guitar', name: "Marshall 1960 kabinet", img: 'images/eq-marshall-1960-lead-cabinet.webp',
+      sr: { desc: "Marshall 1960 gitarski kabinet sa četiri zvučnika.", alt: "Marshall 1960 kabinet" },
+      en: { desc: "Marshall 1960 guitar cabinet with four speakers.", alt: "Marshall 1960 cabinet" },
+      specs: [["Konfiguracija","Configuration","4 × 12\"","4 × 12\""],["Tip","Type","Pasivni gitarski kabinet","Passive guitar cabinet"]] },
+    { id: 'evh-5150-iconic', cat: 'heads', name: "EVH 5150 Iconic glava", img: 'images/eq-evh-5150-iconic-head.webp',
+      sr: { desc: "EVH 5150 Iconic lampaška glava sa dva kanala.", alt: "EVH 5150 Iconic glava" },
+      en: { desc: "EVH 5150 Iconic tube head with two channels.", alt: "EVH 5150 Iconic head" },
+      specs: [["Kanali","Channels","2 (Green i Red)","2 (Green and Red)"],["Tip","Type","Lampaška gitarska glava","Tube guitar head"]] },
+    { id: 'evh-5150-cab', cat: 'guitar', name: "EVH 5150 kabinet", img: 'images/eq-evh-5150-cabinet.webp',
+      sr: { desc: "EVH 5150 gitarski kabinet.", alt: "EVH 5150 kabinet" },
+      en: { desc: "EVH 5150 guitar cabinet.", alt: "EVH 5150 cabinet" },
+      specs: [["Tip","Type","Pasivni gitarski kabinet","Passive guitar cabinet"]] },
+    { id: 'peavey-6505', cat: 'heads', name: "Peavey 6505 glava", img: 'images/eq-peavey-6505-head.webp',
+      sr: { desc: "Peavey 6505 lampaška glava sa Rhythm i Lead kanalom.", alt: "Peavey 6505 glava" },
+      en: { desc: "Peavey 6505 tube head with Rhythm and Lead channels.", alt: "Peavey 6505 head" },
+      specs: [["Kanali","Channels","Rhythm i Lead","Rhythm and Lead"],["Tip","Type","Lampaška gitarska glava","Tube guitar head"]] },
+    { id: 'peavey-cab', cat: 'guitar', name: "Peavey kabinet", img: 'images/eq-peavey-cabinet.webp',
+      sr: { desc: "Peavey gitarski kabinet.", alt: "Peavey kabinet" },
+      en: { desc: "Peavey guitar cabinet.", alt: "Peavey cabinet" },
+      specs: [["Tip","Type","Pasivni gitarski kabinet","Passive guitar cabinet"]] },
+    { id: 'ampeg-head', cat: 'heads', name: "Ampeg bas glava", img: 'images/eq-ampeg-bass-head.webp',
+      sr: { desc: "Ampeg bas glava za bine i probe.", alt: "Ampeg bas glava" },
+      en: { desc: "Ampeg bass head for stages and rehearsals.", alt: "Ampeg bass head" },
+      specs: [["Tip","Type","Bas glava","Bass head"]] },
+    { id: 'ampeg-810', cat: 'bass', name: "Ampeg 8 × 10 kabinet", img: 'images/eq-ampeg-8x10-cabinet.webp',
+      sr: { desc: "Ampeg bas kabinet sa osam zvučnika.", alt: "Ampeg 8 × 10 kabinet" },
+      en: { desc: "Ampeg bass cabinet with eight speakers.", alt: "Ampeg 8 × 10 cabinet" },
+      specs: [["Konfiguracija","Configuration","8 × 10\"","8 × 10\""],["Tip","Type","Pasivni bas kabinet","Passive bass cabinet"]] },
+    { id: 'ampeg-ribbed', cat: 'bass', name: "Ampeg bas kabinet", img: 'images/eq-ampeg-ribbed-cabinet.webp',
+      sr: { desc: "Ampeg bas kabinet.", alt: "Ampeg bas kabinet sa rebrastom maskom" },
+      en: { desc: "Ampeg bass cabinet.", alt: "Ampeg bass cabinet with ribbed grille" },
+      specs: [["Tip","Type","Pasivni bas kabinet","Passive bass cabinet"]] },
+    { id: 'ampeg-classic', cat: 'bass', name: "Ampeg bas kabinet — klasični", img: 'images/eq-ampeg-original-cabinet.webp',
+      sr: { desc: "Ampeg bas kabinet sa kvadratnim logom.", alt: "Ampeg bas kabinet" },
+      en: { desc: "Ampeg bass cabinet with the square badge.", alt: "Ampeg bass cabinet" },
+      specs: [["Tip","Type","Pasivni bas kabinet","Passive bass cabinet"]] },
+    { id: 'bass-head-amber', cat: 'heads', name: "Bas glava", img: 'images/eq-amber-control-bass-head.webp',
+      sr: { desc: "Kompaktna bas glava.", alt: "Bas glava sa narandžastim kontrolama" },
+      en: { desc: "Compact bass head.", alt: "Bass head with orange controls" },
+      specs: [["Tip","Type","Bas glava","Bass head"]] },
+    { id: 'bass-cab-4x', cat: 'bass', name: "Bas kabinet 4 zvučnika", img: 'images/eq-orange-cone-bass-cabinet.webp',
+      sr: { desc: "Bas kabinet sa četiri zvučnika.", alt: "Bas kabinet sa četiri narandžasta zvučnika" },
+      en: { desc: "Bass cabinet with four speakers.", alt: "Bass cabinet with four orange cones" },
+      specs: [["Konfiguracija","Configuration","4 zvučnika","4 speakers"],["Tip","Type","Pasivni bas kabinet","Passive bass cabinet"]] }
+  ];
+
+  dict = {
+    sr: {
+      navServices: 'Usluge', navEquipment: 'Oprema', navRooms: 'Sale', navAbout: 'O nama', navContact: 'Kontakt', navBook: 'Pošalji upit',
+      heroEyebrow: 'Backline · Novi Sad · Cela Srbija',
+      heroKicker: 'Backline i sale za probe',
+      heroBody: 'Iznajmljujemo backline opremu za festivale, koncerte i klupske svirke širom Srbije. Preko 20 godina rada u industriji.',
+      ctaBook: 'Pošalji upit', ctaEquipment: 'Pogledaj opremu',
+      svcEyebrow: 'Šta radimo',
+      svcTitle: 'Naša ponuda i ekspertiza',
+      svc5Title: 'Ekipa za binu',
+      svc5Body: 'Binski tehničari Roadie Systems: postavljanje backlinea, kablaža i rad uz bend tokom nastupa.',
+      svc6Title: 'Škola bubnjeva',
+      svc6Body: 'Individualni časovi sa Draganom Radulovićem, na profesionalnim setovima u našem prostoru.',
+      svc7Title: 'Škola električne gitare',
+      svc7Body: 'Časovi sa Sašom Frišom: rad sa pojačalom i zvukom, od prvih akorda do solo sviranja.',
+      svc8Title: 'Škola akustične gitare',
+      svc8Body: 'Akustična i klasična gitara sa Vladimirom Prošićem: tehnika prstiju, note i držanje instrumenta.',
+      svcLinkCrew: 'Vidi ekipu', svcLinkLessons: 'Vidi časove',
+      svc1Title: 'Bubnjevi',
+      svc1Body: 'Kompletni setovi Gretsch i Tama, sa hardverom i postoljima, spremni za festival ili klub.',
+      svc2Title: 'Gitarska pojačala',
+      svc2Body: 'Fender, Marshall, Peavey i EVH — kombo pojačala i stekovi sa kabinetima 4 × 12".',
+      svc3Title: 'Bas pojačala i kabineti',
+      svc3Body: 'Ampeg i Markbass glave sa kabinetima od 2 × 10" do 8 × 10", za male i velike bine.',
+      svc4Title: 'Sale za probe',
+      svc4Body: 'Četiri sale u Novom Sadu za probe bendova, za redovan rad i pripremu pred turneju.',
+      svcLink: 'Vidi opremu', svcLinkRooms: 'Vidi sale',
+      altMarshall: 'Marshall JCM 2000 DSL stekovi sa kabinetima 1960',
+      altTamaSoha: 'Zeleni Tama Starclassic set u prostoru SoHa u Novom Sadu',
+      altTamaSoha2: 'Drugi ugao istog zelenog Tama Starclassic seta u SoHa, Novi Sad',
+      altSuperstar: 'Tama Superstar bubanj set postavljen na bini, Novi Sad',
+      altLogo: 'Logo PR Backline Studio',
+      bandA: 'Backline za festivale i klubove · Bubnjevi · Pojačala · Kabineti ·',
+      bandB: 'Studio za probe u Novom Sadu · Cela Srbija · PR Backline Studio ·',
+      motionToggle: 'Zaustavi kretanje',
+      moreTitle: 'Više od opreme',
+      rsEyebrow: 'Roadie Systems',
+      rsBadge: 'Binska tehnika',
+      rsTitle: 'Ekipa koja binu drži pod kontrolom',
+      rsBody: 'Roadie Systems su binski tehničari sa dugogodišnjim iskustvom u stage tehnici. Postavljanje backlinea, kablaža, line check i rad tokom nastupa — sve odrađeno pre nego što bend dođe na binu, i tiho održavano dok svirka traje.',
+      rsBullets: ['Postavljanje i demontaža backlinea', 'Kablaža, line check i priprema pre nastupa', 'Tehničar uz bend tokom celog nastupa'],
+      rsCta: 'Traži tehničara',
+      rsRing: 'ROADIE SYSTEMS · STAGE CREW · ',
+      rsAlt: 'Binski tehničari postavljaju backline na festivalskoj bini pod narandžastim svetlima',
+      dsEyebrow: 'Škola bubnjeva',
+      dsBadge: 'Nastava',
+      dsTitle: 'Škola bubnjeva by Dragan Radulović',
+      dsBody: 'Individualna nastava bubnjeva sa Draganom Radulovićem, u našem prostoru i na našim setovima. Rad na tehnici, čitanju i sviranju u bendu, prilagođen nivou svakog učenika.',
+      dsBullets: ['Individualni časovi po nivou učenika', 'Tehnika, ritam i sviranje u bendu', 'Nastava na profesionalnim setovima'],
+      dsCta: 'Prijavi se za časove',
+      dsRing: 'ŠKOLA BUBNJEVA · DRAGAN RADULOVIĆ · ',
+      dsAlt: 'Crno-beli portret Dragana Radulovića',
+      gsEyebrow: 'Škola električne gitare',
+      gsBadge: 'Nastava',
+      gsTitle: 'Škola električne gitare by Saša Friš',
+      gsBody: 'Časovi gitare sa Sašom Frišom, muzičarem sa bogatim scenskim iskustvom. Od prvih akorda do solo sviranja i rada sa pojačalom, uz repertoar koji učenik zaista želi da svira.',
+      gsBullets: ['Časovi za početnike i napredne', 'Rad sa pojačalom i zvukom', 'Repertoar po želji učenika'],
+      gsCta: 'Prijavi se za časove',
+      gsRing: 'ELEKTRIČNA GITARA · SAŠA FRIŠ · ',
+      gsAlt: 'Saša Friš svira električnu gitaru na bini',
+      agEyebrow: 'Škola akustične gitare',
+      agBadge: 'Nastava',
+      agTitle: 'Škola akustične i klasične gitare by Vladimir Prošić',
+      agBody: 'Časovi akustične i klasične gitare sa Vladimirom Prošićem. Rad na tehnici desne i leve ruke, čitanju nota i držanju instrumenta, uz repertoar koji vodi od prvih komada do samostalnog sviranja.',
+      agBullets: ['Akustična i klasična gitara', 'Tehnika prstiju, note i držanje instrumenta', 'Časovi za početnike i napredne'],
+      agCta: 'Prijavi se za časove',
+      agRing: 'ŠKOLA GITARE · VLADIMIR PROŠIĆ · ',
+      agAlt: 'Vladimir Prošić sa akustičnom gitarom u studiju, crno-bela fotografija',
+      eqEyebrow: 'Iznajmljivanje opreme',
+      eqTitle: 'Backline za svaku vrstu svirke',
+      eqBody1: 'Opremamo festivale, koncerte različitih veličina i klupske nastupe. Oprema se iznajmljuje na teritoriji cele Srbije, uz tehničku podršku dogovorenu za konkretan nastup.',
+      eqBody2: 'Pošaljite nam datum, grad i spisak opreme ili tehnički rider, pa ćemo odgovoriti šta možemo da obezbedimo. Poruka je upit, ne potvrđena rezervacija.',
+      filterLabel: 'Filter po kategoriji opreme',
+      tabAll: 'Sve', tabDrums: 'Bubnjevi', tabGuitar: 'Gitarska kombo pojačala i kabineti', tabBass: 'Bas kabineti', tabHeads: 'Glave', tabCymbals: 'Činele',
+      catDrums: 'Bubnjevi', catCymbals: 'Činele', catGuitar: 'Gitarska pojačala', catBass: 'Bas kabineti', catHeads: 'Glave',
+      enquire: 'Pošalji upit',
+      roomsEyebrow: 'Novi Sad · U izgradnji',
+      roomsSoonTitle: 'Četiri sale za probe · Uskoro',
+      roomsSoonBody1: 'Gradimo četiri sale za probe bendova u Novom Sadu. Prostor još nije završen, pa fotografije, dimenzije i cene objavljujemo kada sale budu gotove.',
+      roomsSoonBody2: 'Ako želite termin među prvima, javite se i stavićemo vas na listu za obaveštenje o otvaranju.',
+      roomsSoonTag: 'Uskoro',
+      roomsNotify: 'Obavesti me o otvaranju',
+      priceLabel: 'Pitajte za cenu', priceNote: 'Cena i obračunska jedinica još nisu objavljene.',
+      pricePer: 'Cena po satu još nije objavljena.', cardName: 'Sala za probe', rowPhotos: 'Fotografije sale',
+      rowSize: 'Veličina i kapacitet', rowGear: 'Oprema u sali', rowName: 'Naziv sale',
+      aboutEyebrow: 'O nama',
+      aboutTitle: '20+ godina uz muzičku opremu',
+      aboutBody1: 'Panonija Roadie vodi Vladimir Cakić, uz više od 20 godina iskustva u radu sa muzičkom opremom. To iskustvo je razlog zašto oprema stiže spremna i zašto se problemi rešavaju pre nego što bend izađe na binu.',
+      aboutBody2: 'Backline iznajmljujemo za festivale, koncerte i klupske nastupe širom Srbije. Sale za probe su u Novom Sadu.',
+      aboutBody3: 'Cilj je jednostavan: da se muzičari bave svirkom, a ne opremom.',
+      ringText: 'PANONIJA ROADIE · MUSIC & STAGE EQUIPMENT · NOVI SAD · BACKLINE · ',
+      partnersEyebrow: 'Sa kim radimo',
+      partnersTitle: 'Partneri',
+      galleryEyebrow: 'Iz naše arhive',
+      galleryTitle: 'Sa bine i iz sale',
+      galleryBody: 'Naša oprema na svirkama i probama u Novom Sadu. Nove fotografije dodajemo kako stižu sa nastupa.',
+      capSoha1: 'Tama Starclassic Fusion', capSoha2: 'Isti set, drugi ugao', capStage: 'Tama Superstar', capMarshall: 'Marshall JCM 2000 DSL',
+      capSohaPlace: 'SoHa · Novi Sad', capStagePlace: 'Bina · Novi Sad', capMarshallPlace: 'Sa kabinetima 1960 A i B',
+      contactEyebrow: 'Kontakt',
+      contactTitle: 'Recite nam šta vam treba',
+      contactBody: 'Za backline u celoj Srbiji i sale za probe u Novom Sadu javite se telefonom, porukom ili preko forme. Kontakt osoba je Vladimir Cakić.',
+      formTitle: 'Upit za opremu ili salu',
+      fName: 'Ime i prezime', fPhone: 'Telefon', fNeed: 'Šta vam treba', fNeedBackline: 'Backline oprema', fNeedRoom: 'Sala za probe',
+      fNeedCrew: 'Ekipa za binu', fNeedDrums: 'Časovi bubnjeva', fNeedElectric: 'Časovi električne gitare', fNeedAcoustic: 'Časovi akustične gitare', fNeedOther: 'Nešto drugo',
+      fDate: 'Datum', fCity: 'Grad i mesto', fMessage: 'Spisak opreme ili rider', fSubmit: 'Pošalji upit',
+      formNote: 'Forma otvara vaš mejl program sa već popunjenom porukom. Upit nije potvrđena rezervacija.',
+      formSent: 'Otvorili smo vaš mejl program sa popunjenom porukom. Ako se nije otvorio, pišite na contact-us@prbacklinestudio.com.',
+      chPhone: 'Telefon', chEmail: 'Mejl', chDirect: 'Piši nam direktno',
+      checklistTitle: 'Šta da napišete u poruci',
+      check1: 'Da li vam treba backline ili sala za probe.',
+      check2: 'Koja oprema ili koja sala vas zanima.',
+      check3: 'Datum nastupa ili probe.',
+      check4: 'Grad i mesto održavanja.',
+      check5: 'Broj telefona na koji možemo da vas dobijemo.',
+      footerTag: 'Music & Stage Equipment · Novi Sad'
+    },
+    en: {
+      navServices: 'Services', navEquipment: 'Equipment', navRooms: 'Rooms', navAbout: 'About', navContact: 'Contact', navBook: 'Send an enquiry',
+      heroEyebrow: 'Backline · Novi Sad · All of Serbia',
+      heroKicker: 'Backline & rehearsal rooms',
+      heroBody: 'We rent backline equipment for festivals, concerts and club gigs across Serbia. More than 20 years in the industry.',
+      ctaBook: 'Send an enquiry', ctaEquipment: 'See the equipment',
+      svcEyebrow: 'What we do',
+      svcTitle: 'What we offer and know',
+      svc5Title: 'Stage crew',
+      svc5Body: 'Roadie Systems stage technicians: backline setup, cabling and work with the band through the show.',
+      svc6Title: 'Drum school',
+      svc6Body: 'One-to-one lessons with Dragan Radulović, on professional kits in our own space.',
+      svc7Title: 'Electric guitar school',
+      svc7Body: 'Lessons with Saša Friš: working with amplifiers and tone, from first chords to lead playing.',
+      svc8Title: 'Acoustic guitar school',
+      svc8Body: 'Acoustic and classical guitar with Vladimir Prošić: finger technique, notation and posture.',
+      svcLinkCrew: 'See the crew', svcLinkLessons: 'See the lessons',
+      svc1Title: 'Drums',
+      svc1Body: 'Complete Gretsch and Tama kits with hardware and stands, ready for a festival or a club.',
+      svc2Title: 'Guitar amplifiers',
+      svc2Body: 'Fender, Marshall, Peavey and EVH — combos and stacks with 4 × 12 in cabinets.',
+      svc3Title: 'Bass amps & cabinets',
+      svc3Body: 'Ampeg and Markbass heads with cabinets from 2 × 10 in to 8 × 10 in, for small and large stages.',
+      svc4Title: 'Rehearsal rooms',
+      svc4Body: 'Four rooms in Novi Sad for band rehearsals, for regular work and pre-tour preparation.',
+      svcLink: 'See the equipment', svcLinkRooms: 'See the rooms',
+      altMarshall: 'Marshall JCM 2000 DSL stacks with 1960 cabinets',
+      altTamaSoha: 'Green Tama Starclassic kit at SoHa in Novi Sad',
+      altTamaSoha2: 'Second view of the same green Tama Starclassic kit at SoHa, Novi Sad',
+      altSuperstar: 'Tama Superstar drum kit set up on a stage in Novi Sad',
+      altLogo: 'PR Backline Studio logo',
+      bandA: 'Backline for festivals and clubs · Drums · Amps · Cabinets ·',
+      bandB: 'Band rehearsal rooms in Novi Sad · All of Serbia · PR Backline Studio ·',
+      motionToggle: 'Pause motion',
+      moreTitle: 'More than equipment',
+      rsEyebrow: 'Roadie Systems',
+      rsBadge: 'Stage crew',
+      rsTitle: 'The crew that keeps the stage under control',
+      rsBody: 'Roadie Systems are stage technicians with years of experience in stage engineering. Backline setup, cabling, line check and work through the show — all done before the band walks on, and quietly maintained while the set runs.',
+      rsBullets: ['Backline setup and tear-down', 'Cabling, line check and pre-show prep', 'A technician with the band throughout the show'],
+      rsCta: 'Request a technician',
+      rsRing: 'ROADIE SYSTEMS · STAGE CREW · ',
+      rsAlt: 'Stage technicians setting up backline on a festival stage under orange lights',
+      dsEyebrow: 'Drum school',
+      dsBadge: 'Lessons',
+      dsTitle: 'Drum school by Dragan Radulović',
+      dsBody: 'One-to-one drum lessons with Dragan Radulović, in our space and on our kits. Work on technique, reading and playing in a band, matched to each student level.',
+      dsBullets: ['One-to-one lessons by student level', 'Technique, timing and playing in a band', 'Lessons on professional kits'],
+      dsCta: 'Sign up for lessons',
+      dsRing: 'DRUM SCHOOL · DRAGAN RADULOVIĆ · ',
+      dsAlt: 'Black and white portrait of Dragan Radulović',
+      gsEyebrow: 'Electric guitar school',
+      gsBadge: 'Lessons',
+      gsTitle: 'Electric guitar school by Saša Friš',
+      gsBody: 'Guitar lessons with Saša Friš, a musician with deep stage experience. From first chords to lead playing and working with an amplifier, built around the repertoire the student actually wants to play.',
+      gsBullets: ['Lessons for beginners and advanced players', 'Working with amplifiers and tone', 'Repertoire chosen by the student'],
+      gsCta: 'Sign up for lessons',
+      gsRing: 'ELECTRIC GUITAR · SAŠA FRIŠ · ',
+      gsAlt: 'Saša Friš playing electric guitar on stage',
+      agEyebrow: 'Acoustic guitar school',
+      agBadge: 'Lessons',
+      agTitle: 'Acoustic and classical guitar school by Vladimir Prošić',
+      agBody: 'Acoustic and classical guitar lessons with Vladimir Prošić. Work on right- and left-hand technique, reading notation and holding the instrument, with a repertoire that runs from first pieces to playing on your own.',
+      agBullets: ['Acoustic and classical guitar', 'Finger technique, notation and posture', 'Lessons for beginners and advanced players'],
+      agCta: 'Sign up for lessons',
+      agRing: 'GUITAR SCHOOL · VLADIMIR PROŠIĆ · ',
+      agAlt: 'Vladimir Prošić with an acoustic guitar in the studio, black and white photograph',
+      eqEyebrow: 'Equipment rental',
+      eqTitle: 'Backline for every kind of gig',
+      eqBody1: 'We supply festivals, concerts of different sizes and club shows. Equipment is rented across Serbia, with technical support agreed for the specific performance.',
+      eqBody2: 'Send us the date, the city and your equipment list or technical rider, and we will tell you what we can supply. A message is an enquiry, not a confirmed booking.',
+      filterLabel: 'Filter by equipment category',
+      tabAll: 'All', tabDrums: 'Drums', tabGuitar: 'Guitar combos & cabinets', tabBass: 'Bass cabinets', tabHeads: 'Heads', tabCymbals: 'Cymbals',
+      catDrums: 'Drums', catCymbals: 'Cymbals', catGuitar: 'Guitar amplifiers', catBass: 'Bass cabinets', catHeads: 'Heads',
+      enquire: 'Send an enquiry',
+      roomsEyebrow: 'Novi Sad · Under construction',
+      roomsSoonTitle: 'Four rehearsal rooms · Coming soon',
+      roomsSoonBody1: 'We are building four band rehearsal rooms in Novi Sad. The space is not finished yet, so photographs, dimensions and prices go up once the rooms are ready.',
+      roomsSoonBody2: 'If you want one of the first slots, get in touch and we will add you to the opening notification list.',
+      roomsSoonTag: 'Coming soon',
+      roomsNotify: 'Notify me at opening',
+      priceLabel: 'Ask for the price', priceNote: 'The price and billing unit have not been published yet.',
+      pricePer: 'The hourly price has not been published yet.', cardName: 'Rehearsal room', rowPhotos: 'Room photographs',
+      rowSize: 'Size and capacity', rowGear: 'Equipment in the room', rowName: 'Room name',
+      aboutEyebrow: 'About',
+      aboutTitle: '20+ years with music equipment',
+      aboutBody1: 'Panonija Roadie is run by Vladimir Cakić, with more than 20 years of experience working with music equipment. That experience is why the gear arrives ready and why problems get solved before the band walks on stage.',
+      aboutBody2: 'We rent backline for festivals, concerts and club shows across Serbia. The rehearsal rooms are in Novi Sad.',
+      aboutBody3: 'The goal is simple: musicians should think about playing, not about equipment.',
+      ringText: 'PANONIJA ROADIE · MUSIC & STAGE EQUIPMENT · NOVI SAD · BACKLINE · ',
+      partnersEyebrow: 'Who we work with',
+      partnersTitle: 'Partners',
+      galleryEyebrow: 'From our archive',
+      galleryTitle: 'On stage and in the room',
+      galleryBody: 'Our equipment at shows and rehearsals in Novi Sad. New photographs go up as they come in from gigs.',
+      capSoha1: 'Tama Starclassic Fusion', capSoha2: 'Same kit, another view', capStage: 'Tama Superstar', capMarshall: 'Marshall JCM 2000 DSL',
+      capSohaPlace: 'SoHa · Novi Sad', capStagePlace: 'Stage · Novi Sad', capMarshallPlace: 'With 1960 A and B cabinets',
+      contactEyebrow: 'Contact',
+      contactTitle: 'Tell us what you need',
+      contactBody: 'For backline across Serbia and rehearsal rooms in Novi Sad, reach us by phone, message or through the form. The contact person is Vladimir Cakić.',
+      formTitle: 'Equipment or room enquiry',
+      fName: 'Full name', fPhone: 'Phone', fNeed: 'What you need', fNeedBackline: 'Backline equipment', fNeedRoom: 'Rehearsal room',
+      fNeedCrew: 'Stage crew', fNeedDrums: 'Drum lessons', fNeedElectric: 'Electric guitar lessons', fNeedAcoustic: 'Acoustic guitar lessons', fNeedOther: 'Something else',
+      fDate: 'Date', fCity: 'City and venue', fMessage: 'Equipment list or rider', fSubmit: 'Send the enquiry',
+      formNote: 'The form opens your email app with the message prefilled. An enquiry is not a confirmed booking.',
+      formSent: 'We opened your email app with the message prefilled. If nothing opened, write to contact-us@prbacklinestudio.com.',
+      chPhone: 'Phone', chEmail: 'Email', chDirect: 'Message us directly',
+      checklistTitle: 'What to include in your message',
+      check1: 'Whether you need backline or a rehearsal room.',
+      check2: 'Which equipment or which room you are asking about.',
+      check3: 'The date of the show or rehearsal.',
+      check4: 'The city and the venue.',
+      check5: 'A phone number we can reach you on.',
+      footerTag: 'Music & Stage Equipment · Novi Sad'
+    }
+  };
+
+  _applyScrolled = () => {
+    const h = document.querySelector('[data-header]');
+    if (!h) return;
+    const y = Math.max(
+      window.scrollY || 0,
+      document.documentElement.scrollTop || 0,
+      document.body.scrollTop || 0,
+      -(h.getBoundingClientRect().top - (h.offsetTop || 0))
+    );
+    const on = y > 40;
+    h.setAttribute('data-scrolled', on ? '1' : '0');
+    if (on !== this.state.scrolled) this.setState({ scrolled: on });
+  };
+
+  _onScroll = () => {
+    if (this._raf) return;
+    this._raf = requestAnimationFrame(() => { this._raf = null; this._applyScrolled(); });
+  };
+
+  componentDidMount() {
+    this._scrollTargets = [window, document, document.body, document.documentElement];
+    for (const t of this._scrollTargets) t.addEventListener('scroll', this._onScroll, { passive: true, capture: true });
+    this._applyScrolled();
+  }
+
+  componentWillUnmount() {
+    for (const t of (this._scrollTargets || [])) t.removeEventListener('scroll', this._onScroll, { capture: true });
+    if (this._raf) cancelAnimationFrame(this._raf);
+  }
+
+  componentDidUpdate() {
+    document.querySelectorAll('#oprema img[data-src]').forEach(el => {
+      const src = el.getAttribute('data-src');
+      if (src && !src.includes('{{') && el.getAttribute('src') !== src) el.setAttribute('src', src);
+    });
+  }
+
+  setCardImg = (el) => {
+    if (!el) return;
+    const src = el.getAttribute('data-src');
+    if (src && !src.includes('{{') && el.getAttribute('src') !== src) el.setAttribute('src', src);
+  };
+
+  copyNumber = () => {
+    const n = '+381621803874';
+    if (navigator.clipboard) { navigator.clipboard.writeText(n).catch(() => {}); }
+    this.setState({ copied: true });
+    clearTimeout(this._ct);
+    this._ct = setTimeout(() => this.setState({ copied: false }), 2200);
+  };
+
+  submitForm = (e) => {
+    e.preventDefault();
+    const f = e.target;
+    const t = this.dict[this.state.lang];
+    const g = (k) => (f.elements[k] && f.elements[k].value) || '';
+    const needMap = { backline: t.fNeedBackline, crew: t.fNeedCrew, room: t.fNeedRoom, drums: t.fNeedDrums, electric: t.fNeedElectric, acoustic: t.fNeedAcoustic, other: t.fNeedOther };
+    const need = needMap[g('need')] || t.fNeedBackline;
+    const subject = 'PR Backline Studio — ' + need;
+    const body = [
+      t.fName + ': ' + g('name'),
+      t.fPhone + ': ' + g('phone'),
+      t.fNeed + ': ' + need,
+      t.fDate + ': ' + g('date'),
+      t.fCity + ': ' + g('city'),
+      '',
+      g('message')
+    ].join('\n');
+    window.location.href = 'mailto:contact-us@prbacklinestudio.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    this.setState({ sent: true });
+  };
+
+  renderVals() {
+    const lang = this.state.lang;
+    const t = this.dict[lang];
+    const cat = this.state.cat;
+    const catLabels = { drums: t.catDrums, cymbals: t.catCymbals, guitar: t.catGuitar, bass: t.catBass, heads: t.catHeads };
+    const visibleItems = this.items
+      .filter(i => cat === 'all' || i.cat === cat)
+      .map((i, n) => {
+        const all = (i.specs || []).map(r => ({ label: lang === 'sr' ? r[0] : r[1], value: lang === 'sr' ? r[2] : r[3] }));
+        const head = all[0] || { label: '', value: '' };
+        return {
+          id: i.id, name: i.name, img: i.img, catLabel: catLabels[i.cat], enquire: t.enquire, alt: i[lang].alt, desc: i[lang].desc,
+          index: String(n + 1).padStart(2, '0'),
+          loading: n < 3 ? 'eager' : 'lazy',
+          priority: n < 3 ? 'high' : 'low',
+          headLabel: head.label, headValue: head.value,
+          rows: all.slice(1)
+        };
+      });
+    const rooms = [1, 2, 3, 4].map(n => ({
+      id: 'room' + n,
+      label: (lang === 'sr' ? 'Sala ' : 'Room ') + n,
+      num: '0' + n,
+      img: 'images/room-' + n + '.webp',
+      tape: lang === 'sr' ? 'Uskoro' : 'Coming soon',
+    }));
+    const partners = [
+      { id: 'shmix', img: 'images/partner-shmix.webp', alt: 'Shmix', cap: '74%' },
+      { id: 'room4', img: 'images/partner-room4.webp', alt: 'Room 4', cap: '100%' }
+    ];
+    ['rsBullets', 'dsBullets', 'gsBullets', 'agBullets'].forEach(k => { t[k + 'Rows'] = t[k].map(label => ({ label })); });
+    const h = React.createElement;
+    const ring = (id, txt) => h('svg', {
+      viewBox: '0 0 200 200', 'aria-hidden': 'true', 'data-motion': '1',
+      style: { position: 'absolute', inset: 0, width: '100%', height: '100%', animation: 'pr-spin 30s linear infinite', animationPlayState: this.state.paused ? 'paused' : 'running' }
+    }, [
+      h('defs', { key: 'd' }, h('path', { id: id, d: 'M100,100 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0' })),
+      h('text', { key: 't', fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 14, letterSpacing: 1.9, fill: '#F09020' },
+        h('textPath', { href: '#' + id, startOffset: 0 }, txt))
+    ]);
+    const n = visibleItems.length;
+    let countLabel;
+    if (lang !== 'sr') countLabel = n + (n === 1 ? ' item' : ' items');
+    else {
+      const d10 = n % 10, d100 = n % 100;
+      if (d10 === 1 && d100 !== 11) countLabel = n + ' stavka';
+      else if (d10 >= 2 && d10 <= 4 && (d100 < 12 || d100 > 14)) countLabel = n + ' stavke';
+      else countLabel = n + ' stavki';
+    }
+    const on = '#F09020', off = 'transparent';
+    return {
+      t, visibleItems, rooms, countLabel,
+      checkRows: [t.check1, t.check2, t.check3, t.check4, t.check5].map((text, i) => ({ num: '0' + (i + 1), text })),
+      setCardImg: this.setCardImg,
+      hdrBg: this.state.scrolled ? 'rgba(247,247,245,0.62)' : 'rgba(247,247,245,0.72)',
+      hdrPadY: this.state.scrolled ? '4px' : '10px',
+      hdrLogo: this.state.scrolled ? 'clamp(42px,6.1vw,59px)' : 'clamp(53px,7.7vw,75px)',
+      hdrWord: this.state.scrolled ? 'clamp(16px,2.1vw,20px)' : 'clamp(19px,2.6vw,25px)',
+      ringSvc1: ring('pr-svc1', t.rsRing),
+      ringSvc2: ring('pr-svc2', t.dsRing),
+      ringSvc3: ring('pr-svc3', t.gsRing),
+      ringSvc4: ring('pr-svc4', t.agRing), partners,
+      playState: this.state.paused ? 'paused' : 'running',
+      motionLabel: this.state.paused ? (lang === 'sr' ? 'Pokreni kretanje' : 'Resume motion') : t.motionToggle,
+      copyLabel: this.state.copied ? t.copied : t.copy,
+      formNote: this.state.sent ? t.formSent : t.formNote,
+      isSR: lang === 'sr', isEN: lang === 'en',
+      bgLangSR: lang === 'sr' ? on : off, fgLangSR: lang === 'sr' ? '#0A0A0A' : '#111111',
+      bgLangEN: lang === 'en' ? on : off, fgLangEN: lang === 'en' ? '#0A0A0A' : '#111111',
+      bgAll: cat === 'all' ? '#111111' : 'transparent', fgAll: cat === 'all' ? '#F7F7F5' : '#111111',
+      bgDrums: cat === 'drums' ? '#111111' : 'transparent', fgDrums: cat === 'drums' ? '#F7F7F5' : '#111111',
+      bgGuitar: cat === 'guitar' ? '#111111' : 'transparent', fgGuitar: cat === 'guitar' ? '#F7F7F5' : '#111111',
+      bgBass: cat === 'bass' ? '#111111' : 'transparent', fgBass: cat === 'bass' ? '#F7F7F5' : '#111111',
+      bgHeads: cat === 'heads' ? '#111111' : 'transparent', fgHeads: cat === 'heads' ? '#F7F7F5' : '#111111',
+      bgCymbals: cat === 'cymbals' ? '#111111' : 'transparent', fgCymbals: cat === 'cymbals' ? '#F7F7F5' : '#111111',
+      setSR: () => this.setState({ lang: 'sr' }),
+      setEN: () => this.setState({ lang: 'en' }),
+      selAll: () => this.setState({ cat: 'all' }),
+      selDrums: () => this.setState({ cat: 'drums' }),
+      selGuitar: () => this.setState({ cat: 'guitar' }),
+      selBass: () => this.setState({ cat: 'bass' }),
+      selHeads: () => this.setState({ cat: 'heads' }),
+      selCymbals: () => this.setState({ cat: 'cymbals' }),
+      togglePause: () => this.setState(s => ({ paused: !s.paused })),
+      copyNumber: this.copyNumber,
+      submitForm: this.submitForm
+    };
+  }
+}
+</script>
+</body>
+</html>
