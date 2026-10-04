@@ -114,7 +114,7 @@
     <div style="flex:1 1 auto;display:flex;justify-content:center;gap:clamp(12px,2.2vw,28px);flex-wrap:wrap" data-nav="1">
       <a href="#usluge" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navServices }}</a>
       <a href="#oprema" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navEquipment }}</a>
-      <a href="#sale" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navRooms }}</a>
+      <a href="#studio" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navRooms }}</a>
       <a href="#o-nama" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navAbout }}</a>
       <a href="#kontakt" data-navlink="1" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;min-height:44px">{{ t.navContact }}</a>
     </div>
@@ -236,7 +236,7 @@
         </svg>
         <h3 style="font-family:Oswald,sans-serif;font-weight:600;font-size:23px;letter-spacing:0.1em;text-transform:uppercase;margin:0">{{ t.svc4Title }}</h3>
         <p style="font-size:15.5px;line-height:1.6;color:#55554F;margin:0">{{ t.svc4Body }}</p>
-        <a href="#sale" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLinkRooms }}</span><span aria-hidden="true">&#8594;</span></a>
+        <a href="#studio" data-linkcta="1" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span style="border-bottom:1px solid #CFCEC9;padding-bottom:3px">{{ t.svcLinkRooms }}</span><span aria-hidden="true">&#8594;</span></a>
       </article>
       <article data-svc="1" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;padding:clamp(30px,4.6vw,44px) clamp(20px,3vw,26px);background:#FFFFFF;border:1px solid #E3E2DE;border-radius:26px">
         <svg data-svcicon="1" width="132" height="132" viewBox="0 0 120 120" fill="none" stroke="#F09020" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="transition:transform 260ms ease">
@@ -496,7 +496,7 @@
   </div>
 </section>
 
-<section id="sale" style="background:#111111;color:#F7F7F5;padding:clamp(60px,9vw,104px) clamp(16px,4vw,22px);overflow:hidden">
+<section id="studio" style="background:#111111;color:#F7F7F5;padding:clamp(60px,9vw,104px) clamp(16px,4vw,22px);overflow:hidden">
   <div style="max-width:1320px;margin:0 auto">
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:0 0 26px">
       <span data-motion="1" aria-hidden="true" style="width:9px;height:9px;border-radius:50%;background:#F09020;animation:pr-pulse 2.2s ease-in-out infinite;animation-play-state:{{ playState }}"></span>
@@ -838,9 +838,9 @@ class Component extends DCLogic {
 
   dict = {
     sr: {
-      navServices: 'Usluge', navEquipment: 'Oprema', navRooms: 'Sale', navAbout: 'O nama', navContact: 'Kontakt', navBook: 'Pošalji upit',
+      navServices: 'Usluge', navEquipment: 'Oprema', navRooms: 'Studio', navAbout: 'O nama', navContact: 'Kontakt', navBook: 'Pošalji upit',
       heroEyebrow: 'Backline · Novi Sad · Cela Srbija',
-      heroKicker: 'Backline i sale za probe',
+      heroKicker: 'Backline i studio za probe',
       heroBody: 'Iznajmljujemo backline opremu za festivale, koncerte i klupske svirke širom Srbije. Preko 20 godina rada u industriji.',
       ctaBook: 'Pošalji upit', ctaEquipment: 'Pogledaj opremu',
       svcEyebrow: 'Šta radimo',
@@ -860,9 +860,9 @@ class Component extends DCLogic {
       svc2Body: 'Fender, Marshall, Peavey i EVH — kombo pojačala i stekovi sa kabinetima 4 × 12".',
       svc3Title: 'Bas pojačala i kabineti',
       svc3Body: 'Ampeg i Markbass glave sa kabinetima od 2 × 10" do 8 × 10", za male i velike bine.',
-      svc4Title: 'Sale za probe',
-      svc4Body: 'Četiri sale u Novom Sadu za probe bendova, za redovan rad i pripremu pred turneju.',
-      svcLink: 'Vidi opremu', svcLinkRooms: 'Vidi sale',
+      svc4Title: 'Studio za probe',
+      svc4Body: 'Studio sa četiri prostorije u Novom Sadu za probe bendova, za redovan rad i pripremu pred turneju.',
+      svcLink: 'Vidi opremu', svcLinkRooms: 'Vidi studio',
       altMarshall: 'Marshall JCM 2000 DSL stekovi sa kabinetima 1960',
       altTamaSoha: 'Zeleni Tama Starclassic set u prostoru SoHa u Novom Sadu',
       altTamaSoha2: 'Drugi ugao istog zelenog Tama Starclassic seta u SoHa, Novi Sad',
@@ -913,40 +913,40 @@ class Component extends DCLogic {
       catDrums: 'Bubnjevi', catCymbals: 'Činele', catGuitar: 'Gitarska pojačala', catBass: 'Bas kabineti', catHeads: 'Glave',
       enquire: 'Pošalji upit',
       roomsEyebrow: 'Novi Sad · U izgradnji',
-      roomsSoonTitle: 'Četiri sale za probe · Uskoro',
-      roomsSoonBody1: 'Gradimo četiri sale za probe bendova u Novom Sadu. Prostor još nije završen, pa fotografije, dimenzije i cene objavljujemo kada sale budu gotove.',
+      roomsSoonTitle: 'Studio za probe · Uskoro',
+      roomsSoonBody1: 'Gradimo studio za probe bendova u Novom Sadu. Prostor još nije završen, pa fotografije, dimenzije i cene objavljujemo kada studio bude gotov.',
       roomsSoonBody2: 'Ako želite termin među prvima, javite se i stavićemo vas na listu za obaveštenje o otvaranju.',
       roomsSoonTag: 'Uskoro',
       roomsNotify: 'Obavesti me o otvaranju',
       priceLabel: 'Pitajte za cenu', priceNote: 'Cena i obračunska jedinica još nisu objavljene.',
-      pricePer: 'Cena po satu još nije objavljena.', cardName: 'Sala za probe', rowPhotos: 'Fotografije sale',
-      rowSize: 'Veličina i kapacitet', rowGear: 'Oprema u sali', rowName: 'Naziv sale',
+      pricePer: 'Cena po satu još nije objavljena.', cardName: 'Studio za probe', rowPhotos: 'Fotografije studija',
+      rowSize: 'Veličina i kapacitet', rowGear: 'Oprema u studiju', rowName: 'Naziv studija',
       aboutEyebrow: 'O nama',
       aboutTitle: '20+ godina uz muzičku opremu',
       aboutBody1: 'Panonija Roadie vodi Vladimir Cakić, uz više od 20 godina iskustva u radu sa muzičkom opremom. To iskustvo je razlog zašto oprema stiže spremna i zašto se problemi rešavaju pre nego što bend izađe na binu.',
-      aboutBody2: 'Backline iznajmljujemo za festivale, koncerte i klupske nastupe širom Srbije. Sale za probe su u Novom Sadu.',
+      aboutBody2: 'Backline iznajmljujemo za festivale, koncerte i klupske nastupe širom Srbije. Studio za probe je u Novom Sadu.',
       aboutBody3: 'Cilj je jednostavan: da se muzičari bave svirkom, a ne opremom.',
       ringText: 'PANONIJA ROADIE · MUSIC & STAGE EQUIPMENT · NOVI SAD · BACKLINE · ',
       partnersEyebrow: 'Sa kim radimo',
       partnersTitle: 'Partneri',
       galleryEyebrow: 'Iz naše arhive',
-      galleryTitle: 'Sa bine i iz sale',
+      galleryTitle: 'Sa bine i iz studija',
       galleryBody: 'Naša oprema na svirkama i probama u Novom Sadu. Nove fotografije dodajemo kako stižu sa nastupa.',
       capSoha1: 'Tama Starclassic Fusion', capSoha2: 'Isti set, drugi ugao', capStage: 'Tama Superstar', capMarshall: 'Marshall JCM 2000 DSL',
       capSohaPlace: 'SoHa · Novi Sad', capStagePlace: 'Bina · Novi Sad', capMarshallPlace: 'Sa kabinetima 1960 A i B',
       contactEyebrow: 'Kontakt',
       contactTitle: 'Recite nam šta vam treba',
-      contactBody: 'Za backline u celoj Srbiji i sale za probe u Novom Sadu javite se telefonom, porukom ili preko forme. Kontakt osoba je Vladimir Cakić.',
-      formTitle: 'Upit za opremu ili salu',
-      fName: 'Ime i prezime', fPhone: 'Telefon', fNeed: 'Šta vam treba', fNeedBackline: 'Backline oprema', fNeedRoom: 'Sala za probe',
+      contactBody: 'Za backline u celoj Srbiji i studio za probe u Novom Sadu javite se telefonom, porukom ili preko forme. Kontakt osoba je Vladimir Cakić.',
+      formTitle: 'Upit za opremu ili studio',
+      fName: 'Ime i prezime', fPhone: 'Telefon', fNeed: 'Šta vam treba', fNeedBackline: 'Backline oprema', fNeedRoom: 'Studio za probe',
       fNeedCrew: 'Ekipa za binu', fNeedDrums: 'Časovi bubnjeva', fNeedElectric: 'Časovi električne gitare', fNeedAcoustic: 'Časovi akustične gitare', fNeedOther: 'Nešto drugo',
       fDate: 'Datum', fCity: 'Grad i mesto', fMessage: 'Spisak opreme ili rider', fSubmit: 'Pošalji upit',
       formNote: 'Forma otvara vaš mejl program sa već popunjenom porukom. Upit nije potvrđena rezervacija.',
       formSent: 'Otvorili smo vaš mejl program sa popunjenom porukom. Ako se nije otvorio, pišite na contact-us@prbacklinestudio.com.',
       chPhone: 'Telefon', chEmail: 'Mejl', chDirect: 'Piši nam direktno',
       checklistTitle: 'Šta da napišete u poruci',
-      check1: 'Da li vam treba backline ili sala za probe.',
-      check2: 'Koja oprema ili koja sala vas zanima.',
+      check1: 'Da li vam treba backline ili studio za probe.',
+      check2: 'Koja oprema ili koji termin u studiju vas zanima.',
       check3: 'Datum nastupa ili probe.',
       check4: 'Grad i mesto održavanja.',
       check5: 'Broj telefona na koji možemo da vas dobijemo.',
@@ -1162,7 +1162,7 @@ class Component extends DCLogic {
       });
     const rooms = [1, 2, 3, 4].map(n => ({
       id: 'room' + n,
-      label: (lang === 'sr' ? 'Sala ' : 'Room ') + n,
+      label: (lang === 'sr' ? 'Studio ' : 'Studio ') + n,
       num: '0' + n,
       img: 'images/room-' + n + '.webp',
       tape: lang === 'sr' ? 'Uskoro' : 'Coming soon',
