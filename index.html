@@ -558,34 +558,34 @@
       </div>
     </div>
     <div data-marquee="1" style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)">
-      <div data-ptrack="1" style="display:flex;width:max-content;padding:4px 0;animation:pr-marq 34s linear infinite;animation-play-state:{{ playState }}">
+      <div data-ptrack="1" style="display:flex;width:max-content;padding:4px 0;animation:pr-marq 51s linear infinite;animation-play-state:{{ playState }}">
         <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
-          <div data-partner="1" aria-hidden="false" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+          <div data-partner="1" aria-hidden="false" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:{{ p.bg }};border:1px solid {{ p.bd }};border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
             <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
           </div>
         </sc-for>
         <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
-          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:{{ p.bg }};border:1px solid {{ p.bd }};border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
             <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
           </div>
         </sc-for>
         <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
-          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:{{ p.bg }};border:1px solid {{ p.bd }};border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
             <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
           </div>
         </sc-for>
         <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
-          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:{{ p.bg }};border:1px solid {{ p.bd }};border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
             <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
           </div>
         </sc-for>
         <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
-          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:{{ p.bg }};border:1px solid {{ p.bd }};border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
             <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
           </div>
         </sc-for>
         <sc-for list="{{ partners }}" as="p" hint-placeholder-count="2">
-          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:#FFFFFF;border:1px solid #E3E2DE;border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
+          <div data-partner="1" aria-hidden="true" style="flex:0 0 auto;width:clamp(200px,24vw,260px);height:clamp(130px,15vw,160px);margin-right:18px;display:flex;align-items:center;justify-content:center;padding:28px 32px;background:{{ p.bg }};border:1px solid {{ p.bd }};border-radius:22px;transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease">
             <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="max-width:100%;max-height:{{ p.cap }};width:auto;height:auto;object-fit:contain;display:block" />
           </div>
         </sc-for>
@@ -1168,8 +1168,9 @@ class Component extends DCLogic {
       tape: lang === 'sr' ? 'Uskoro' : 'Coming soon',
     }));
     const partners = [
-      { id: 'shmix', img: 'images/partner-shmix.webp', alt: 'Shmix', cap: '74%' },
-      { id: 'room4', img: 'images/partner-room4.webp', alt: 'Room 4', cap: '100%' }
+      { id: 'shmix', img: 'images/partner-shmix.webp', alt: 'Shmix', cap: '74%', bg: '#FFFFFF', bd: '#E3E2DE' },
+      { id: 'room4', img: 'images/partner-room4.webp', alt: 'Room 4', cap: '100%', bg: '#FFFFFF', bd: '#E3E2DE' },
+      { id: 'modulex', img: 'images/partner-modulex-dark.webp', alt: 'Modulex VB — Premium Event Solutions', cap: '100%', bg: '#FFFFFF', bd: '#E3E2DE' }
     ];
     ['rsBullets', 'dsBullets', 'gsBullets', 'agBullets'].forEach(k => { t[k + 'Rows'] = t[k].map(label => ({ label })); });
     const h = React.createElement;
